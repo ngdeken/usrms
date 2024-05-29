@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -45,6 +46,13 @@ class DatabaseSeeder extends Seeder
                 ],
                 // Add more names here
             ]);
-
+            
+            DB::table('students')->insert([
+                'studentID' => '1',
+                'userID' => '4',
+                'matricID' => 'A20EC0001',
+                'merit' => '0',
+                'active' => '0',
+            ]);
     }
 }

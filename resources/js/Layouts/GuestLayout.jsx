@@ -4,17 +4,15 @@ import { Link } from '@inertiajs/react';
 export default function Guest({ children }) {
     return (
         <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-red-900">
-            <div>
-              {/*}  <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-maroon-500" />
-                </Link>*/}
+            <div>  
                 <h1>USRMS</h1>
                 <h1>UTM Student Residency Management System</h1>
             </div>
 
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-red shadow-md overflow-hidden sm:rounded-lg">
+            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-yellow-600 shadow-md overflow-hidden sm:rounded-lg">
                 {children}
             </div>
         </div>
     );
 }
+

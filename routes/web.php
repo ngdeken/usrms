@@ -4,11 +4,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\StaffDashboardController;
 use App\Http\Controllers\FellowDashboardController;
-use App\Http\Controllers\StudentDashboardController;
+use App\Http\Controllers\Student\StudentDashboardController;
+use App\Http\Controllers\Student\StudentReportController;
 
 /*Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -47,5 +48,7 @@ Route::middleware(['auth', 'fellow'])->group(function () {
 
 Route::middleware(['auth', 'student'])->group(function () {
     Route::get('student/dashboard', [StudentDashboardController::class, 'index']);
+    Route::get('student/report', [StudentReportController::class, 'index'])->name('student.report');
+    Route::post('student/report', [StudentReportController::class, 'submit']);
 });
 require __DIR__.'/auth.php';

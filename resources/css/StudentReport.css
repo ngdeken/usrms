@@ -1,0 +1,79 @@
+.damage-report-form-container {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.view-report-link {
+    text-decoration: none;
+    color: #d23369;
+}
+
+.damage-report-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.damage-report-form label {
+    margin-bottom: 15px;
+}
+
+.damage-report-form .radio-group {
+    display: flex;
+    gap: 10px;
+}
+
+.damage-report-form input[type="text"],
+.damage-report-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.damage-report-form textarea {
+    height: 100px;
+}
+
+.damage-report-form input[type="file"] {
+    margin-top: 10px;
+}
+
+.damage-report-form input[type="checkbox"] {
+    margin-left: 10px;
+}
+
+.damage-report-form button {
+    padding: 10px 20px;
+    background-color: #d23369;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.damage-report-form button:hover {
+    background-color: #b21c4d;
+}
+
+/* App.css */
+.app-container {
+    display: flex;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}

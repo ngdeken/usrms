@@ -1,21 +1,33 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+// HomePage.jsx
+import React from 'react';
+import Sidebar from '../Components/StaffSidebar';
+import '../../css/StaffHome.css'; // Assuming you have CSS for styling
 
-export default function StaffDashboard({ auth }) {
+const HomePage = () => {
+    const statusCards = [
+        { title: 'Appliances registration', status: 'In progress', color: '#d4b06a' },
+        { title: 'Damage Report', status: 'In progress', color: '#2f4550' },
+        { title: 'Active quota application', status: 'Pending', color: '#243d72' }
+    ];
+
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Staff Dashboard</h2>}
-        >
-            <Head title="Staff Dashboard" />
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
-                    </div>
+        <div className="app-container">
+            <Sidebar />
+            <div className="content">
+                <header className="header">
+                    <h1>Welcome back, Ng De Ken!</h1>
+                </header>
+                <div className="status-cards">
+                    {statusCards.map((card, index) => (
+                        <div key={index} className="status-card" style={{ borderColor: card.color }}>
+                            <h2>{card.title}</h2>
+                            <p>{card.status}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </div>
     );
-}
+};
+
+export default HomePage;
