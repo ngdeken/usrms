@@ -23,24 +23,6 @@ return new class extends Migration
             $table->unsignedBigInteger('roomID')->nullable();
             $table->foreign('roomID')->references('id')->on('rooms');
             $table->integer('merit');
-            $table->integer('active'); // 0 for inactive, 1 for active, 2 for pending
-            $table->string('firstRoomType')->nullable();
-            $table->unsignedBigInteger('firstRoomBlock')->nullable();
-            $table->foreign('firstRoomBlock')->references('blockID')->on('blocks');
-            $table->unsignedBigInteger('firstRoomID')->nullable();
-            $table->foreign('firstRoomID')->references('id')->on('rooms');
-            $table->string('secondRoomType')->nullable();
-            $table->unsignedBigInteger('secondRoomBlock')->nullable();
-            $table->foreign('secondRoomBlock')->references('blockID')->on('blocks');
-            $table->unsignedBigInteger('secondRoomID')->nullable();
-            $table->foreign('secondRoomID')->references('id')->on('rooms');
-            $table->string('thirdRoomType')->nullable();
-            $table->unsignedBigInteger('thirdRoomBlock')->nullable();
-            $table->foreign('thirdRoomBlock')->references('blockID')->on('blocks');
-            $table->unsignedBigInteger('thirdRoomID')->nullable();
-            $table->foreign('thirdRoomID')->references('id')->on('rooms');
-            $table->unsignedBigInteger('roommate')->nullable();
-            $table->foreign('roommate')->references('id')->on('users');
             $table->timestamps();
         });
     }

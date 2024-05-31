@@ -16,17 +16,6 @@ class Student extends Model
         'blockID',
         'roomID',
         'merit',
-        'active',
-        'firstRoomType',
-        'firstRoomBlock',
-        'firstRoomID',
-        'secondRoomType',
-        'secondRoomBlock',
-        'secondRoomID',
-        'thirdRoomType',
-        'thirdRoomBlock',
-        'thirdRoomID',
-        'roommate'
     ];
 
     public function user()

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('blockName');
             $table->string('floor');
             $table->integer('roomID');
-            $table->string('reportStatus')->default('pending');
+            $table->string('reportStatus')->default('pending'); //Pending //Resolved
             $table->string('reportDescription');
             $table->string('reportCategory');
             $table->boolean('agree');

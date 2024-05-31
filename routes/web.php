@@ -49,6 +49,6 @@ Route::middleware(['auth', 'fellow'])->group(function () {
 Route::middleware(['auth', 'student'])->group(function () {
     Route::get('student/dashboard', [StudentDashboardController::class, 'index']);
     Route::get('student/report', [StudentReportController::class, 'index'])->name('student.report');
-    Route::post('student/report', [StudentReportController::class, 'submit']);
+    Route::post('student/report', [StudentReportController::class, 'submit'])->name('student.report.submit');
 });
 require __DIR__.'/auth.php';
