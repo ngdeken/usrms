@@ -18,11 +18,13 @@ return new class extends Migration
             $table->string('blockName');
             $table->string('floor');
             $table->integer('roomID');
-            $table->string('reportStatus')->default('pending'); //Pending //Resolved
+            $table->string('reportStatus')->default('pending'); //Pending //Completed //In Progress
             $table->string('reportDescription');
             $table->string('reportCategory');
             $table->boolean('agree');
             $table->string('reportImage')->nullable();
+            $table->unsignedBigInteger('updated_by');
+            $table->foreign('updated_by')->references('id')->on('users');
             $table->timestamps();
         });
     }

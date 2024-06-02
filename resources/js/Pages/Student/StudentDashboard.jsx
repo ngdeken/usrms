@@ -1,7 +1,7 @@
 // HomePage.jsx
 import React from 'react';
-import Sidebar from '../Components/StaffSidebar';
-import '../../css/StaffHome.css'; // Assuming you have CSS for styling
+import Sidebar from '../../Components/StudentSidebar';
+import '../../../css/StaffHome.css'; // Assuming you have CSS for styling
 
 const HomePage = () => {
     const statusCards = [

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Sidebar from '../Components/StudentSidebar';
+import Sidebar from '../../Components/StudentSidebar';
 import { router, useForm } from '@inertiajs/react';
-import '../../css/StudentReport.css'; // Assuming you have CSS for styling
+import '../../../css/StudentReport.css'; // Assuming you have CSS for styling
 
 const StudentReport = ({ auth }) => {
     const { data, setData, post, errors, reset } = useForm({
@@ -13,12 +13,11 @@ const StudentReport = ({ auth }) => {
         reportDescription: '',
         reportCategory: '',
         agree: false,
-        reportImage: null,
+        reportImage: '',
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Success")
         post(route("student.report.submit"));
     };
 
@@ -28,7 +27,7 @@ const StudentReport = ({ auth }) => {
         <div className="damage-report-form-container">
             <header className="form-header">
                 <h1>Make Damage Report</h1>
-                <a href="#" className="view-report-link">View Damage Report</a>
+                <a href="http://127.0.0.1:8000/student/report/view" className="view-report-link">View Damage Report</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
                 <label>

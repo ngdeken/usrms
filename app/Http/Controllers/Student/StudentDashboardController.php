@@ -11,7 +11,7 @@ class StudentDashboardController extends Controller
     //
     public function index(Request $request)
     {
-        return Inertia::render('StudentDashboard', [
+        return Inertia::render('Student/StudentDashboard', [
         ]);
     }
 }

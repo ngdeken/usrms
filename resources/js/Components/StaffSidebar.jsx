@@ -1,6 +1,7 @@
 // Sidebar.jsx
 import React from 'react';
-import '../../css/Sidebar.css'; // Assuming you have CSS for styling
+import '../../css/Sidebar.css';
+import { Link } from '@inertiajs/react';
 
 const Sidebar = () => {
     return (
@@ -18,7 +19,7 @@ const Sidebar = () => {
                 </ul>
             </nav>
             <div className="sidebar-footer">
-                <button>Logout</button>
+                <Link href={route('logout')} method="post" as="button">Logout</Link>
                 <p>Student</p>
                 <p>KTDI M22 217</p>
                 <p>Ng De Ken</p>

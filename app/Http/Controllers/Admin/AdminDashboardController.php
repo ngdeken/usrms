@@ -11,7 +11,7 @@ class AdminDashboardController extends Controller
     //
     public function index(Request $request)
     {
-        return Inertia::render('AdminDashboard', [
+        return Inertia::render('Admin/AdminDashboard', [
         ]);
     }
 }

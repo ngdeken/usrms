@@ -20,9 +20,15 @@ class StudentReport extends Model
         'description',
         'agree',
         'reportImage',
+        'updated_by',
     ];
 
     public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'userID');
+    }
+
+    public function updatedBy()
     {
         return $this->belongsTo(User::class, 'userID');
     }

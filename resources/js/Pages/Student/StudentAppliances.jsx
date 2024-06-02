@@ -1,6 +1,6 @@
 // AppliancesRegistration.jsx
 import React from 'react';
-import Sidebar from '../Components/StaffSidebar';
+import Sidebar from '../../Components/StaffSidebar';
 import '../../css/StaffRegister.css'; // Assuming you have CSS for styling
 
 const AppliancesRegistration = () => {

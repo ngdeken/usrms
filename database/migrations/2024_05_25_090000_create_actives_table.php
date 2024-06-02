@@ -20,6 +20,10 @@ return new class extends Migration
             $table->unsignedBigInteger('eventID');
             $table->foreign('eventID')->references('eventID')->on('events');
             $table->string('activeImage')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->unsignedBigInteger('updated_by');
+            $table->foreign('updated_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
