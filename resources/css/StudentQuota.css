@@ -1,0 +1,98 @@
+.quota-application-container {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+.quota-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.view-quota-link {
+    text-decoration: none;
+    color: #d23369;
+}
+
+.quota-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.quota-table th,
+.quota-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.quota-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.total-merit {
+    font-size: 1.2em;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.quota-form {
+    margin-top: 20px;
+}
+
+.form-section {
+    margin-bottom: 20px;
+}
+
+.upload-button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #d23369;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.room-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.choice {
+    display: flex;
+    gap: 10px;
+}
+
+.choice select,
+.choice input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #d23369;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+.app-container {
+    display: flex;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}

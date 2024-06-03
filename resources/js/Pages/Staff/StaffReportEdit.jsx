@@ -3,17 +3,18 @@ import Sidebar from '../../Components/StudentSidebar';
 import { router, useForm } from '@inertiajs/react';
 import '../../../css/StudentReport.css';
 
-const StudentReport = ({ auth }) => {
+const StaffReport = ({ auth, report }) => {
     const { data, setData, post, errors, reset } = useForm({
-        userID: '',
-        blockName: '',
-        floor: '',
-        roomID: '',
-        reportStatus: 'pending',
-        reportDescription: '',
-        reportCategory: '',
-        agree: false,
-        reportImage: '',
+        reportID: report.reportID,
+        userID: report.userID,
+        blockName: report.blockName,
+        floor: report.floor,
+        roomID: report.roomID,
+        reportStatus: report.reportStatus || "",
+        reportDescription: report.reportDescription,
+        reportCategory: report.reportCategory,
+        agree: report.agree,
+        reportImage: report.reportImage,
     });
 
     const handleSubmit = (e) => {
@@ -26,8 +27,8 @@ const StudentReport = ({ auth }) => {
             <Sidebar user={auth.user}/>
         <div className="damage-report-form-container">
             <header className="form-header">
-                <h1>Make Damage Report</h1>
-                <a href="http://127.0.0.1:8000/student/report/view" className="view-report-link">View Damage Report</a>
+                <h1>Update Damage Report "{report.reportID}"</h1>
+                <a href="http://127.0.0.1:8000/staff/report/" className="view-report-link">View Damage Report</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
                 <label>
@@ -96,4 +97,4 @@ const StudentReport = ({ auth }) => {
     );
 };
 
-export default StudentReport;
+export default StaffReport;

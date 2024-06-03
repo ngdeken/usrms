@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../../Components/StudentSidebar';
+import Sidebar from '../../Components/StaffSidebar';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import Pagination from "@/Components/Pagination";
 import {
@@ -11,7 +11,12 @@ import TextInput from "@/Components/TextInput";
 import TableHeading from "@/Components/TableHeading";
 import '../../../css/StudentReport.css';
 
-const StudentReportView = ({ auth, reports, queryParams = null, success }) => {
+const StaffReport = ({ auth, reports, queryParams = null, success }) => {
+    const { data, setData, post, errors, reset } = useForm({
+        reportStatus: reports.reportStatus || "",
+        _method: "PATCH",
+    });
+
     queryParams = queryParams || {};
     const searchFieldChanged = (name, value) => {
         if (value) {
@@ -43,13 +48,25 @@ const StudentReportView = ({ auth, reports, queryParams = null, success }) => {
       router.get(route("student.report.view"), queryParams);
     };
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+    
+        post(route("staff.report.update", reports.reportID));
+      };
+
+    const deleteReport = (report) => {
+        if (!window.confirm("Are you sure you want to delete the report?")) {
+          return;
+        }
+        router.delete(route("staff.report.destroy", report.reportID));
+      };
+
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
             <div className="damage-report-form-container">
                 <header className="form-header">
-                    <h1>View Damage Report</h1>
-                    <a href="http://127.0.0.1:8000/student/report/" className="view-report-link">Make Damage Report</a>
+                    <h1>Manage Damage Report</h1>
                 </header>
                 <table>
                     <thead>
@@ -166,23 +183,42 @@ const StudentReportView = ({ auth, reports, queryParams = null, success }) => {
                                     )}
                                 </td>
                                 <td className='px-3 py-2'>
-                                    <span
-                                        className={
-                                        "px-2 py-1 rounded text-white " +
-                                        REPORT_STATUS_CLASS_MAP[report.reportStatus]
-                                        }
-                                    >
-                                        {REPORT_STATUS_TEXT_MAP[report.reportStatus]}
-                                    </span>
+                                    {(
+                                        <span
+                                            className={
+                                                "px-2 py-1 rounded text-white " +
+                                                REPORT_STATUS_CLASS_MAP[report.reportStatus]
+                                            }
+                                        >
+                                            {REPORT_STATUS_TEXT_MAP[report.reportStatus]}
+                                        </span>
+                                    )}
+                                </td>
+                                <td className="px-3 py-2 text-nowrap">
+                                <Link
+                                    href={route("staff.report.edit", report.reportID)}
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                >
+                                    Edit
+                                </Link>
+                                
+                                <button
+                                    onClick={(e) => deleteReport(report)}
+                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
+                                >
+                                    Delete
+                                </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                
+
                 <Pagination links={reports.meta.links} />
             </div>
         </div>
     );
 };
 
-export default StudentReportView;
+export default StaffReport;

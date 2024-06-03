@@ -5,11 +5,15 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Staff\StaffDashboardController;
+use App\Http\Controllers\Staff\StaffReportController;
 use App\Http\Controllers\Fellow\FellowDashboardController;
+use App\Http\Controllers\Student\StudentApplianceController;
 use App\Http\Controllers\Student\StudentDashboardController;
 use App\Http\Controllers\Student\StudentReportController;
+use App\Http\Controllers\Student\StudentQuotaController;
 
 /*Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -35,21 +39,32 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('admin/dashboard', [AdminDashboardController::class, 'index']);
+    Route::get('admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.index');
+    Route::get('admin/user', [AdminUserController::class, 'index'])->name('admin.user');
+    Route::get('admin/create', [AdminUserController::class, 'create'])->name('admin.create');
+    Route::post('admin/create', [AdminUserController::class, 'store'])->name('admin.create.store');
+    Route::get('admin/user/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
 });
 
 Route::middleware(['auth', 'staff'])->group(function () {
     Route::get('staff/dashboard', [StaffDashboardController::class, 'index']);
+    Route::get('staff/report', [StaffReportController::class, 'index'])->name('staff.report');
+    Route::get('staff/report/{reportID}', [StaffReportController::class, 'edit'])->name('staff.report.edit');
+    Route::patch('staff/report/edit', [StaffReportController::class, 'update'])->name('staff.report.update');
+    Route::delete('staff/report', [StaffReportController::class, 'destroy'])->name('staff.report.destroy');
 });
 
 Route::middleware(['auth', 'fellow'])->group(function () {
-    Route::get('fellow/dashboard', [FellowDashboardController::class, 'index']);
+    Route::get('fellow/dashboard', [FellowDashboardController::class, 'index'])->name('fellow.index');
 });
 
 Route::middleware(['auth', 'student'])->group(function () {
     Route::get('student/dashboard', [StudentDashboardController::class, 'index']);
     Route::get('student/report', [StudentReportController::class, 'index'])->name('student.report');
     Route::get('student/report/view', [StudentReportController::class, 'show'])->name('student.report.view');
+    Route::get('student/quota', [StudentQuotaController::class, 'index'])->name('student.quota');
+    Route::get('student/appliance', [StudentApplianceController::class, 'index'])->name('student.appliance');
+    Route::get('student/appliance/create', [StudentApplianceController::class, 'create'])->name('student.appliance.create');
     Route::post('student/report', [StudentReportController::class, 'submit'])->name('student.report.submit');
 });
 require __DIR__.'/auth.php';

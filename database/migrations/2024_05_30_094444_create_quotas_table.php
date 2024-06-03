@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('quotas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('studentID');
-            $table->foreign('studentID')->references('studentID')->on('students');
+            $table->unsignedBigInteger('userID');
+            $table->foreign('userID')->references('id')->on('users');
             $table->integer('active'); // 0 for inactive, 1 for active, 2 for pending
             $table->string('firstRoomType')->nullable();
             $table->unsignedBigInteger('firstRoomBlock')->nullable();

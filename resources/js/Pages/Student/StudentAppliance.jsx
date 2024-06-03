@@ -1,9 +1,9 @@
-// AppliancesRegistration.jsx
 import React from 'react';
-import Sidebar from '../../Components/StaffSidebar';
-import '../../css/StaffRegister.css'; // Assuming you have CSS for styling
+import Sidebar from '../../Components/StudentSidebar';
+import '../../../css/StudentAppliance.css';
+import '../../../css/StudentReport.css';
 
-const AppliancesRegistration = () => {
+const AppliancesRegistration = ({auth}) => {
     const registrations = [
         {
             id: 1,
@@ -17,13 +17,13 @@ const AppliancesRegistration = () => {
 
     return (
         <div className="app-container">
-            <Sidebar />
+            <Sidebar user={auth.user}/>
             <div className="content">
                 <header className="header">
                     <h1>View Appliances Registration</h1>
                     <div className="actions">
-                        <button className="btn-register">Register Electrical Appliances</button>
-                        <button className="btn-view">View Appliances Registration</button>
+                    <a href="http://127.0.0.1:8000/student/appliance/create" className="view-report-link">Register Electrical Appliances</a>
+                
                     </div>
                 </header>
                 <table className="registrations-table">

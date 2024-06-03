@@ -17,7 +17,7 @@ const AppliancesRegistration = () => {
 
     return (
         <div className="app-container">
-            <Sidebar />
+            <Sidebar user={auth.user}/>
             <div className="content">
                 <header className="header">
                     <h1>View Appliances Registration</h1>

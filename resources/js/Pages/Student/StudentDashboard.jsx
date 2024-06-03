@@ -1,9 +1,8 @@
-// HomePage.jsx
 import React from 'react';
 import Sidebar from '../../Components/StudentSidebar';
 import '../../../css/StaffHome.css'; // Assuming you have CSS for styling
 
-const HomePage = () => {
+const HomePage = ({auth, user}) => {
     const statusCards = [
         { title: 'Appliances registration', status: 'In progress', color: '#d4b06a' },
         { title: 'Damage Report', status: 'In progress', color: '#2f4550' },
@@ -11,11 +10,12 @@ const HomePage = () => {
     ];
 
     return (
+        
         <div className="app-container">
-            <Sidebar />
+            <Sidebar user={auth.user}/>
             <div className="content">
                 <header className="header">
-                    <h1>Welcome back, Ng De Ken!</h1>
+                    <h1>Welcome back, {auth.user.name}!</h1>
                 </header>
                 <div className="status-cards">
                     {statusCards.map((card, index) => (
