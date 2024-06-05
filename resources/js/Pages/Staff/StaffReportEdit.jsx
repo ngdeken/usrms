@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Sidebar from '../../Components/StudentSidebar';
 import { router, useForm } from '@inertiajs/react';
 import '../../../css/StudentReport.css';
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import SelectInput from "@/Components/SelectInput";
+import TextAreaInput from "@/Components/TextAreaInput";
 
 const StaffReport = ({ auth, report }) => {
     const { data, setData, post, errors, reset } = useForm({
-        reportID: report.reportID,
         userID: report.userID,
         blockName: report.blockName,
         floor: report.floor,
@@ -15,11 +18,12 @@ const StaffReport = ({ auth, report }) => {
         reportCategory: report.reportCategory,
         agree: report.agree,
         reportImage: report.reportImage,
+        _method: "PUT",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("student.report.submit"));
+        post(route("staff.report.update", report.id));
     };
 
     return (
@@ -27,7 +31,7 @@ const StaffReport = ({ auth, report }) => {
             <Sidebar user={auth.user}/>
         <div className="damage-report-form-container">
             <header className="form-header">
-                <h1>Update Damage Report "{report.reportID}"</h1>
+                <h1>Update Damage Report {report.id}</h1>
                 <a href="http://127.0.0.1:8000/staff/report/" className="view-report-link">View Damage Report</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
@@ -79,8 +83,13 @@ const StaffReport = ({ auth, report }) => {
                 </label>
                 <label>
                     6. Damage photos
-                    <input type="file" name="reportImage" onChange={(e) => setData("reportImage", e.target.files[0])} />
-                </label>
+                    {report.reportImage && (
+                <div className="mb-4">
+                  <img src={report.reportImage} className="w-64" />
+                  <input type="file" name="reportImage" onChange={(e) => setData("reportImage", e.target.files[0])} />
+                </div>
+              )}
+                </label>    
                 <label>
                     7. I Certify That The Above Statements Are True and Promise To Comply With The Safety Instructions As Above.
                     <input
@@ -90,6 +99,17 @@ const StaffReport = ({ auth, report }) => {
                         onChange={(e) => setData("agree", e.target.checked)}
                     />
                 </label>
+                <div className="mt-4">
+                    <label>
+                    8. Manage status
+                    <select name="reportStatus" onChange={(e) => setData("reportStatus", e.target.value)}>
+                        <option value="">Select Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    </label>
+                 </div>
                 <button type="submit">Submit</button>
             </form>
         </div>

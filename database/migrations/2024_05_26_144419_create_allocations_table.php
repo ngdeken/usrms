@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('allocations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hostelID')->nullable();
-            $table->foreign('hostelID')->references('hostelID')->on('hostels');
+            $table->foreign('hostelID')->references('id')->on('hostels');
             $table->unsignedBigInteger('blockID')->nullable();
-            $table->foreign('blockID')->references('blockID')->on('blocks');
+            $table->foreign('blockID')->references('id')->on('blocks');
             $table->unsignedBigInteger('roomID')->nullable();
             $table->foreign('roomID')->references('id')->on('rooms');
             $table->unsignedBigInteger('studentID')->nullable();
-            $table->foreign('studentID')->references('studentID')->on('students');
+            $table->foreign('studentID')->references('id')->on('students');
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users');
             $table->unsignedBigInteger('updated_by');

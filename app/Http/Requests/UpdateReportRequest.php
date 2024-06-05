@@ -25,12 +25,12 @@ class UpdateReportRequest extends FormRequest
         return [
             'blockName' => ['required', 'string', 'max:255'],
             'floor' => ['required', 'string', 'max:255'],
-            'roomID' => ['required', 'string', 'max:255'],
+            //'roomID' => ['required', 'string', 'max:255'],
             'reportStatus'=> ['required', 'string', 'max:255'],
             'reportDescription' => ['required', 'string', 'max:255'],
             'reportCategory' => ['required', 'string', 'max:255'],
             'agree' => ['required', 'boolean'],
-            'reportImage' => ['nullable', 'image'],
+            //'reportImage' => ['nullable', 'image'],
         ];
     }
 }

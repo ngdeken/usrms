@@ -43,15 +43,18 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/user', [AdminUserController::class, 'index'])->name('admin.user');
     Route::get('admin/create', [AdminUserController::class, 'create'])->name('admin.create');
     Route::post('admin/create', [AdminUserController::class, 'store'])->name('admin.create.store');
-    Route::get('admin/user/{id}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
+    Route::get('admin/user/{user}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
+    Route::put('admin/user/{user}', [AdminUserController::class, 'update'])->name('admin.user.update');
+    Route::delete('admin/user/{user}', [AdminUserController::class, 'destroy'])->name('admin.user.destroy');
+    //Route::resource('admin/user', AdminUserController::class);
 });
 
 Route::middleware(['auth', 'staff'])->group(function () {
     Route::get('staff/dashboard', [StaffDashboardController::class, 'index']);
     Route::get('staff/report', [StaffReportController::class, 'index'])->name('staff.report');
-    Route::get('staff/report/{reportID}', [StaffReportController::class, 'edit'])->name('staff.report.edit');
-    Route::patch('staff/report/edit', [StaffReportController::class, 'update'])->name('staff.report.update');
-    Route::delete('staff/report', [StaffReportController::class, 'destroy'])->name('staff.report.destroy');
+    Route::get('staff/report/{report}', [StaffReportController::class, 'edit'])->name('staff.report.edit');
+    Route::put('staff/report/{report}', [StaffReportController::class, 'update'])->name('staff.report.update');
+    Route::delete('staff/report/{report}', [StaffReportController::class, 'destroy'])->name('staff.report.destroy');
 });
 
 Route::middleware(['auth', 'fellow'])->group(function () {

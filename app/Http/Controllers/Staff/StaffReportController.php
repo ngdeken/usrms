@@ -25,8 +25,8 @@ class StaffReportController extends Controller
         $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
 
-        if (request("name")) {
-            $query->where("name", "like", "%" . request("name") . "%");
+        if (request("blockName")) {
+            $query->where("blockName", "like", "%" . request("blockName") . "%");
         }
         if (request("reportStatus")) {
             $query->where("reportStatus", request("reportStatus"));
@@ -50,8 +50,14 @@ class StaffReportController extends Controller
     public function update(UpdateReportRequest $request, StudentReport $report)
     {
         $data = $request->validated();
+        $image = $data['image'] ?? null;
         $data['updated_by'] = Auth::id();
-        
+        if ($image) {
+            if ($report->reportImage) {
+                Storage::disk('public')->deleteDirectory(dirname($report->reportImage));
+            }
+            $data['reportImage'] = $image->store('report/' . Str::random(), 'public');
+        }
         $report->update($data);
 
         return to_route('staff.report')
@@ -61,7 +67,7 @@ class StaffReportController extends Controller
 
     public function destroy(StudentReport $report)
     {
-        $reportID = $report->reportID;
+        $reportID = $report->id;
         $report->delete();
         if ($report->reportImage) {
             Storage::disk('public')->deleteDirectory(dirname($report->reportImage));

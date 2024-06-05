@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ReportResource extends JsonResource
 {
+    public static $wrap = false;
     /**
      * Transform the resource into an array.
      *
@@ -17,7 +18,7 @@ class ReportResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'reportID' => $this->reportID,
+            'id' => $this->id,
             'created_at' => (new Carbon($this->created_at))->format('Y-m-d H:i:s'),
             'blockName' => $this->blockName,
             'userID' => new UserResource($this->createdBy),

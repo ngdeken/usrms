@@ -48,7 +48,6 @@ class DatabaseSeeder extends Seeder
             ]);
             
             DB::table('students')->insert([
-                'studentID' => '1',
                 'userID' => '4',
                 'matricID' => 'A20EC0001',
                 'merit' => '0',

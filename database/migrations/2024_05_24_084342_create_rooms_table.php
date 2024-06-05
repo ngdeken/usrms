@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('roomID');
             $table->unsignedBigInteger('blockID');
-            $table->foreign('blockID')->references('blockID')->on('blocks');
+            $table->foreign('blockID')->references('id')->on('blocks');
             $table->char('floor', 1);
             $table->string('roomType');
             $table->integer('roomPerson');

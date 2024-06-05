@@ -13,7 +13,7 @@ const Sidebar = ({auth, user}) => {
             <nav className="sidebar-nav">
                 <ul>
                     <li><a href="http://127.0.0.1:8000/student/dashboard">Home</a></li>
-                    <li><a href="http://127.0.0.1:8000/student/report">Damage Report</a></li>
+                    <li><a href="http://127.0.0.1:8000/student/report/view">Damage Report</a></li>
                     <li><a href="http://127.0.0.1:8000/student/quota">Active Quota Application</a></li>
                     <li><a href="http://127.0.0.1:8000/student/appliance">Appliances Registration</a></li>
                 </ul>

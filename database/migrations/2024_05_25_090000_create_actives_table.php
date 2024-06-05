@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('actives', function (Blueprint $table) {
-            $table->bigIncrements('activeID');
+            $table->id();
             $table->unsignedBigInteger('studentID')->nullable();
-            $table->foreign('studentID')->references('studentID')->on('students');
+            $table->foreign('studentID')->references('id')->on('students');
             $table->string('position');
             $table->integer('merit');
             $table->unsignedBigInteger('eventID');
-            $table->foreign('eventID')->references('eventID')->on('events');
+            $table->foreign('eventID')->references('id')->on('events');
             $table->string('activeImage')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users');

@@ -42,14 +42,14 @@ const AdminUser = ({ auth, users, queryParams = null, success }) => {
     const onSubmit = (e) => {
         e.preventDefault();
     
-        post(route("admin.user.update", users.userID));
+        post(route("admin.user.update", users.id));
       };
 
     const deleteuser = (user) => {
         if (!window.confirm("Are you sure you want to delete the user?")) {
           return;
         }
-        router.delete(route("admin.user.destroy", user.userID));
+        router.delete(route("admin.user.destroy", user.id));
       };
 
     return (
@@ -116,8 +116,28 @@ const AdminUser = ({ auth, users, queryParams = null, success }) => {
                     <thead>
                     <tr className="text-nowrap">
                         <th className="px-3 py-3"></th>
-                        <th className="px-3 py-3"></th>
-                        <th className="px-3 py-3"></th>
+                        <th className="px-3 py-3">
+                        <TextInput
+                          className="w-full"
+                          defaultValue={queryParams.email}
+                          placeholder="User Email"
+                          onBlur={(e) =>
+                            searchFieldChanged("email", e.target.value)
+                          }
+                          onKeyPress={(e) => onKeyPress("email", e)}
+                        />
+                        </th>
+                        <th className="px-3 py-3">
+                          <TextInput
+                          className="w-full"
+                          defaultValue={queryParams.name}
+                          placeholder="User Name"
+                          onBlur={(e) =>
+                            searchFieldChanged("name", e.target.value)
+                          }
+                          onKeyPress={(e) => onKeyPress("name", e)}
+                          />
+                        </th>
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>

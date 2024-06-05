@@ -51,14 +51,14 @@ const StaffReport = ({ auth, reports, queryParams = null, success }) => {
     const onSubmit = (e) => {
         e.preventDefault();
     
-        post(route("staff.report.update", reports.reportID));
+        post(route("staff.report.update", reports.id));
       };
 
     const deleteReport = (report) => {
         if (!window.confirm("Are you sure you want to delete the report?")) {
           return;
         }
-        router.delete(route("staff.report.destroy", report.reportID));
+        router.delete(route("staff.report.destroy", report.id));
       };
 
     return (
@@ -72,7 +72,7 @@ const StaffReport = ({ auth, reports, queryParams = null, success }) => {
                     <thead>
                         <tr className="text-nowrap">
                         <TableHeading
-                            name="reportID"
+                            name="id"
                             sort_field={queryParams.sort_field}
                             sort_direction={queryParams.sort_direction}
                             sortChanged={sortChanged}
@@ -168,8 +168,8 @@ const StaffReport = ({ auth, reports, queryParams = null, success }) => {
                     </thead>
                     <tbody>
                         {reports.data.map((report) => (
-                            <tr key={report.reportID}>
-                                <td className='px-3 py-2'>{report.reportID}</td>
+                            <tr key={report.id}>
+                                <td className='px-3 py-2'>{report.id}</td>
                                 <td className='px-4 py-4'>{new Date(report.created_at).toLocaleString()}</td>
                                 <td className='px-3 py-2'>{report.userID.name}</td>
                                 <td className='px-3 py-2'>{report.blockName}</td>
@@ -196,7 +196,7 @@ const StaffReport = ({ auth, reports, queryParams = null, success }) => {
                                 </td>
                                 <td className="px-3 py-2 text-nowrap">
                                 <Link
-                                    href={route("staff.report.edit", report.reportID)}
+                                    href={route("staff.report.edit", report.id)}
                                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                                 >
                                     Edit

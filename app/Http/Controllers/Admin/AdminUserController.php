@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Resources\UserCrudResource;
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateReportRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Inertia\Response;
 
 class AdminUserController extends Controller
@@ -27,7 +27,7 @@ class AdminUserController extends Controller
             $query->where("name", "like", "%" . request("name") . "%");
         }
         if (request("email")) {
-            $query->where("email", request("email"));
+            $query->where("email", "like", "%" . request("email") . "%");
         }
 
         $users = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1)->withQueryString();
@@ -52,13 +52,37 @@ class AdminUserController extends Controller
         $data['password'] = bcrypt($data['password']);
         User::create($data);
 
-        return to_route('admin.index')->with('success', 'User was created');
+        return to_route('admin.user')->with('success', 'User was created');
     }
 
     public function edit(User $user)
     {
-        return Inertia::render('Admin/AdminUserEdit', [
+        return inertia('Admin/AdminUserEdit', [
             'user' => new UserCrudResource($user),
         ]);
     }
+
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $data = $request->validated();
+        $password = $data['password'] ?? null;
+        if ($password) {
+            $data['password'] = bcrypt($password);
+        } else {
+            unset($data['password']);
+        }
+        $user->update($data);
+
+        return to_route('admin.user')
+            ->with('success', "User \"$user->name\" was updated");
+    }
+
+    public function destroy(User $user)
+    {
+        $name = $user->name;
+        $user->delete();
+        return to_route('admin.user')
+            ->with('success', "User \"$name\" was deleted");
+    }
+
 }

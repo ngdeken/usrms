@@ -55,7 +55,7 @@ const StudentReportView = ({ auth, reports, queryParams = null, success }) => {
                     <thead>
                         <tr className="text-nowrap">
                         <TableHeading
-                            name="reportID"
+                            name="id"
                             sort_field={queryParams.sort_field}
                             sort_direction={queryParams.sort_direction}
                             sortChanged={sortChanged}
@@ -127,7 +127,17 @@ const StudentReportView = ({ auth, reports, queryParams = null, success }) => {
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
-                        <th className="px-3 py-3"></th>
+                        <th className="px-3 py-3">
+                        <TextInput
+                          className="w-full"
+                          defaultValue={queryParams.blockName}
+                          placeholder="Block"
+                          onBlur={(e) =>
+                            searchFieldChanged("blockName", e.target.value)
+                          }
+                          onKeyPress={(e) => onKeyPress("blockName", e)}
+                        />
+                        </th>
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
@@ -151,8 +161,8 @@ const StudentReportView = ({ auth, reports, queryParams = null, success }) => {
                     </thead>
                     <tbody>
                         {reports.data.map((report) => (
-                            <tr key={report.reportID}>
-                                <td className='px-3 py-2'>{report.reportID}</td>
+                            <tr key={report.id}>
+                                <td className='px-3 py-2'>{report.id}</td>
                                 <td className='px-4 py-4'>{new Date(report.created_at).toLocaleString()}</td>
                                 <td className='px-3 py-2'>{report.userID.name}</td>
                                 <td className='px-3 py-2'>{report.blockName}</td>

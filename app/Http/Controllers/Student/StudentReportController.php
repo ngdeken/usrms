@@ -36,7 +36,7 @@ class StudentReportController extends Controller
         }
         StudentReport::create($report);
             
-        return to_route('student.report')->with('success', 'Report submitted successfully');
+        return to_route('student.report.view')->with('success', 'Report submitted successfully');
     }
 
     public function show(Request $request)
@@ -46,8 +46,8 @@ class StudentReportController extends Controller
         $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
 
-        if (request("name")) {
-            $query->where("name", "like", "%" . request("name") . "%");
+        if (request("blockName")) {
+            $query->where("blockName", "like", "%" . request("blockName") . "%");
         }
         if (request("reportStatus")) {
             $query->where("reportStatus", request("reportStatus"));

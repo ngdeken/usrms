@@ -1,94 +1,57 @@
 import React, { useState } from 'react';
-import Sidebar from '../../Components/StudentSidebar';
-import { router, useForm } from '@inertiajs/react';
+import Sidebar from '../../Components/AdminSidebar';
+import { Link,  router, useForm } from '@inertiajs/react';
 import '../../../css/StudentReport.css';
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import SelectInput from "@/Components/SelectInput";
+import TextAreaInput from "@/Components/TextAreaInput";
+import TextInput from "@/Components/TextInput";
 
-const StaffReport = ({ auth, report }) => {
+const AdminUserEdit = ({ auth, user }) => {
     const { data, setData, post, errors, reset } = useForm({
-        reportID: report.reportID,
-        userID: report.userID,
-        blockName: report.blockName,
-        floor: report.floor,
-        roomID: report.roomID,
-        reportStatus: report.reportStatus || "",
-        reportDescription: report.reportDescription,
-        reportCategory: report.reportCategory,
-        agree: report.agree,
-        reportImage: report.reportImage,
+        name: user.name || "",
+        email: user.email || "",
+        password: "",
+        role: user.role || "",
+        gender: user.gender || "",
+        _method: "PUT",
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("student.report.submit"));
+        post(route("admin.user.update", user.id));
     };
 
     return (
         <div className="app-container">
-            <Sidebar />
+            <Sidebar user={auth.user}/>
         <div className="damage-report-form-container">
             <header className="form-header">
-                <h1>Update Damage Report "{report.reportID}"</h1>
-                <a href="http://127.0.0.1:8000/staff/report/" className="view-report-link">View Damage Report</a>
+                <h1>Edit User</h1>
+                <a href="http://127.0.0.1:8000/admin/user/" className="view-report-link">Manage User</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
+   
                 <label>
-                    1. Building or damage location
-                    <input type="text" name="blockName" value={data.blockName} onChange={(e) => setData("blockName", e.target.value)} />
+                1. User Name
+                    <input type="text" name="name" value={data.name} onChange={(e) => setData("name", e.target.value)} />
                 </label>
                 <label>
-                    2. Floor
-                    <div className="radio-group">
-                        {['Floor G', 'Floor 1', 'Floor 2', 'Floor 3', 'Floor 4'].map((floor) => (
-                            <label key={floor}>
-                                <input
-                                    type="radio"
-                                    name="floor"
-                                    value={floor}
-                                    checked={data.floor === floor}
-                                    onChange={(e) => setData("floor", e.target.value)}
-                                />
-                                {floor}
-                            </label>
-                        ))}
-                    </div>
+                    2. Email
+                    <input type="text" name="email" value={data.email} onChange={(e) => setData("email", e.target.value)} />
                 </label>
                 <label>
-                    3. Room Number/ Toilet Number
-                    <input type="text" name="roomID" value={data.roomID} onChange={(e) => setData("roomID", e.target.value)} />
+                    3. Password
+                    <input type="password" name="password" value={data.password} onChange={(e) => setData("password", e.target.value)} />
                 </label>
                 <label>
-                    4. Damage category
-                    <div className="radio-group">
-                        {['Civil Damage', 'Electrical Damage', 'Furniture Damage'].map((category) => (
-                            <label key={category}>
-                                <input
-                                    type="radio"
-                                    name="reportCategory"
-                                    value={category}
-                                    checked={data.reportCategory === category}
-                                    onChange={(e) => setData("reportCategory", e.target.value)}
-                                />
-                                {category}
-                            </label>
-                        ))}
-                    </div>
+                    4. Role
+                    <input type="text" name="role" value={data.role} onChange={(e) => setData("role", e.target.value)} />
                 </label>
                 <label>
-                    5. Description
-                    <textarea name="reportDescription" value={data.reportDescription} onChange={(e) => setData("reportDescription", e.target.value)}></textarea>
-                </label>
-                <label>
-                    6. Damage photos
-                    <input type="file" name="reportImage" onChange={(e) => setData("reportImage", e.target.files[0])} />
-                </label>
-                <label>
-                    7. I Certify That The Above Statements Are True and Promise To Comply With The Safety Instructions As Above.
-                    <input
-                        type="checkbox"
-                        name="agree"
-                        checked={data.agree}
-                        onChange={(e) => setData("agree", e.target.checked)}
-                    />
+                    5. Gender
+                    <input type="text" name="gender" value={data.gender} onChange={(e) => setData("gender", e.target.value)} />
                 </label>
                 <button type="submit">Submit</button>
             </form>
@@ -97,4 +60,4 @@ const StaffReport = ({ auth, report }) => {
     );
 };
 
-export default StaffReport;
+export default AdminUserEdit;
