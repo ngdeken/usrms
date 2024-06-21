@@ -52,5 +52,6 @@ class DatabaseSeeder extends Seeder
                 'matricID' => 'A20EC0001',
                 'merit' => '0',
             ]);
+
     }
 }
