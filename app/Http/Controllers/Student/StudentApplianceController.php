@@ -8,13 +8,31 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Appliance;
 use App\Models\Order;
+use App\Http\Resources\ApplianceResource;
+use App\Http\Resources\OrderResource;
 
 class StudentApplianceController extends Controller
 {
     public function index(Request $request)
     {
         $user = auth()->user();
+        $query = Order::query();
+        $sortField = request("sort_field", 'created_at');
+        $sortDirection = request("sort_direction", "desc");
+
+        if (request("block")) {
+            $query->where("block", "like", "%" . request("block") . "%");
+        }
+        if (request("status")) {
+            $query->where("status", request("status"));
+        }
+
+        $orders = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1)->withQueryString();
+
         return Inertia::render('Student/StudentAppliance', [
+            "orders" => OrderResource::collection($orders),
+            'queryParams' => request()->query() ?: null,
+            'success' => session('success'),
         ]);
     }
 

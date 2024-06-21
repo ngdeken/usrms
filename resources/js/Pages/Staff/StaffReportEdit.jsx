@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../../Components/StudentSidebar';
+import Sidebar from '../../Components/StaffSidebar';
 import { router, useForm } from '@inertiajs/react';
 import '../../../css/StudentReport.css';
 import InputError from "@/Components/InputError";

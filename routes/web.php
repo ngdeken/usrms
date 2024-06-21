@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Staff\StaffDashboardController;
 use App\Http\Controllers\Staff\StaffReportController;
+use App\Http\Controllers\Staff\StaffApplianceController;
 use App\Http\Controllers\Fellow\FellowDashboardController;
 use App\Http\Controllers\Student\StudentApplianceController;
 use App\Http\Controllers\Student\StudentDashboardController;
@@ -53,8 +54,12 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::get('staff/dashboard', [StaffDashboardController::class, 'index']);
     Route::get('staff/report', [StaffReportController::class, 'index'])->name('staff.report');
     Route::get('staff/report/{report}', [StaffReportController::class, 'edit'])->name('staff.report.edit');
+    Route::get('staff/appliance', [StaffApplianceController::class, 'index'])->name('staff.appliance');
+    Route::get('staff/appliance/{order}', [StaffApplianceController::class, 'edit'])->name('staff.appliance.edit');
     Route::put('staff/report/{report}', [StaffReportController::class, 'update'])->name('staff.report.update');
     Route::delete('staff/report/{report}', [StaffReportController::class, 'destroy'])->name('staff.report.destroy');
+    Route::put('staff/appliance/{order}', [StaffApplianceController::class, 'update'])->name('staff.appliance.update');
+    Route::delete('staff/appliance/{order}', [StaffApplianceController::class, 'destroy'])->name('staff.appliance.destroy');
 });
 
 Route::middleware(['auth', 'fellow'])->group(function () {

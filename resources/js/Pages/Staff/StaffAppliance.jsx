@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../../Components/StudentSidebar';
+import Sidebar from '../../Components/StaffSidebar';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import Pagination from "@/Components/Pagination";
 import {
@@ -20,7 +20,7 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
         delete queryParams[name];
         }
 
-        router.get(route("student.appliance"), queryParams);
+        router.get(route("staff.appliance"), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -40,7 +40,7 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
       }
-      router.get(route("student.appliance"), queryParams);
+      router.get(route("staff.appliance"), queryParams);
     };
 
     return (
@@ -48,8 +48,7 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
             <Sidebar user={auth.user}/>
             <div className="damage-report-form-container">
                 <header className="form-header">
-                    <h1>View Appliances Registration</h1>
-                    <a href="http://127.0.0.1:8000/student/appliance/create" className="view-report-link">Register Appliances</a>
+                    <h1>Manage Appliances Registration</h1>
                 </header>
                 <table>
                     <thead>
@@ -112,7 +111,7 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
                         <th className="px-3 py-3"></th>
-                        <th className="px-3 py-3">
+                        <th className="px-2 py-2">
                         <TextInput
                           className="w-full"
                           defaultValue={queryParams.block}
@@ -163,6 +162,21 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
                                     >
                                         {REPORT_STATUS_TEXT_MAP[order.status]}
                                     </span>
+                                </td>
+                                <td className="px-3 py-2 text-nowrap">
+                                <Link
+                                    href={route("staff.appliance.edit", order.id)}
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                >
+                                    Edit
+                                </Link>
+                                
+                                <button
+                                    onClick={(e) => deleteReport(report)}
+                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
+                                >
+                                    Delete
+                                </button>
                                 </td>
                             </tr>
                         ))}
