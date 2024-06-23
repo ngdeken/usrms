@@ -14,7 +14,7 @@ const Sidebar = ({auth, user}) => {
                     <li><a href="http://127.0.0.1:8000/staff/dashboard">Home</a></li>
                     <li><a href="http://127.0.0.1:8000/staff/report">Manage Damage Report</a></li>
                     <li><a href="http://127.0.0.1:8000/staff/appliance">Appliances Registration</a></li>
-                    <li><a href="#">Room Allocation</a></li>
+                    <li><a href="http://127.0.0.1:8000/staff/hostels">Room Allocation</a></li>
                 </ul>
             </nav>
             <div className="sidebar-footer">

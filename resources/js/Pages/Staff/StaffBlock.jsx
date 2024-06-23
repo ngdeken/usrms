@@ -11,7 +11,7 @@ import TextInput from "@/Components/TextInput";
 import TableHeading from "@/Components/TableHeading";
 import '../../../css/StudentReport.css';
 
-const StudentReportView = ({ auth, rooms, queryParams = null, success }) => {
+const StudentReportView = ({ auth, blocks, queryParams = null, success }) => {
     queryParams = queryParams || {};
     const searchFieldChanged = (name, value) => {
         if (value) {
@@ -20,7 +20,7 @@ const StudentReportView = ({ auth, rooms, queryParams = null, success }) => {
         delete queryParams[name];
         }
 
-        router.get(route("staff.rooms.index"), queryParams);
+        router.get(route("staff.blocks.index"), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -40,7 +40,7 @@ const StudentReportView = ({ auth, rooms, queryParams = null, success }) => {
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
       }
-      router.get(route("staff.rooms.index"), queryParams);
+      router.get(route("staff.blocks.index"), queryParams);
     };
 
     return (
@@ -48,8 +48,8 @@ const StudentReportView = ({ auth, rooms, queryParams = null, success }) => {
             <Sidebar user={auth.user}/>
             <div className="damage-report-form-container">
                 <header className="form-header">
-                    <h1>Room Management</h1>
-                    <a href="http://127.0.0.1:8000/staff/rooms/create" className="view-report-link">Add Room</a>
+                    <h1>Block Management</h1>
+                    <a href="http://127.0.0.1:8000/staff/blocks/create" className="view-report-link">Add Block</a>
                 </header>
                 <table>
                     <thead>
@@ -63,44 +63,20 @@ const StudentReportView = ({ auth, rooms, queryParams = null, success }) => {
                             ID
                         </TableHeading>
                         <TableHeading
+                            name="hostel"
+                            sort_field={queryParams.sort_field}
+                            sort_direction={queryParams.sort_direction}
+                            sortChanged={sortChanged}
+                        >
+                            Hostel
+                        </TableHeading>
+                        <TableHeading
                             name="block"
                             sort_field={queryParams.sort_field}
                             sort_direction={queryParams.sort_direction}
                             sortChanged={sortChanged}
                         >
                             Block
-                        </TableHeading>
-                        <TableHeading
-                            name="room"
-                            sort_field={queryParams.sort_field}
-                            sort_direction={queryParams.sort_direction}
-                            sortChanged={sortChanged}
-                        >
-                            Room
-                        </TableHeading>
-                        <TableHeading
-                            name="floor"
-                            sort_field={queryParams.sort_field}
-                            sort_direction={queryParams.sort_direction}
-                            sortChanged={sortChanged}
-                        >
-                            Floor
-                        </TableHeading>
-                        <TableHeading
-                            name="roomType"
-                            sort_field={queryParams.sort_field}
-                            sort_direction={queryParams.sort_direction}
-                            sortChanged={sortChanged}
-                        >
-                            Room Type
-                        </TableHeading>
-                        <TableHeading
-                            name="vacancy"
-                            sort_field={queryParams.sort_field}
-                            sort_direction={queryParams.sort_direction}
-                            sortChanged={sortChanged}
-                        >
-                            Vacancy
                         </TableHeading>
                         </tr>
                     </thead>
@@ -112,6 +88,18 @@ const StudentReportView = ({ auth, rooms, queryParams = null, success }) => {
                         <TextInput
                           className="w-full"
                           defaultValue={queryParams.hostelName}
+                          placeholder="Hostel"
+                          onBlur={(e) =>
+                            searchFieldChanged("hostelName", e.target.value)
+                          }
+                          onKeyPress={(e) => onKeyPress("hostelName", e)}
+                        />
+                        </th>
+                        
+                        <th className="px-2 py-2">
+                        <TextInput
+                          className="w-full"
+                          defaultValue={queryParams.blockName}
                           placeholder="Block"
                           onBlur={(e) =>
                             searchFieldChanged("blockName", e.target.value)
@@ -119,49 +107,35 @@ const StudentReportView = ({ auth, rooms, queryParams = null, success }) => {
                           onKeyPress={(e) => onKeyPress("blockName", e)}
                         />
                         </th>
-                        
-                        <th className="px-2 py-2">
-                        <TextInput
-                          className="w-full"
-                          defaultValue={queryParams.roomID}
-                          placeholder="Room"
-                          onBlur={(e) =>
-                            searchFieldChanged("roomID", e.target.value)
-                          }
-                          onKeyPress={(e) => onKeyPress("roomID", e)}
-                        />
-                        </th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        {rooms.data.map((room) => (
-                            <tr key={room.id}>
-                                <td className='px-3 py-2'>{room.id}</td>
-                                <td className='px-3 py-2'>{room.blockID.blockName}</td>
-                                <td className='px-3 py-2'>{room.roomID}</td>
-                                <td className='px-3 py-2'>{room.floor}</td>
-                                <td className='px-3 py-2'>{room.roomType}</td>
-                                <td className='px-3 py-2'>{room.vacancy}</td>
+                        {blocks.data.map((block) => (
+                            <tr key={block.id}>
+                                <td className='px-3 py-2'>{block.id}</td>
+                                <td className='px-3 py-2'>{block.hostelID.hostelName}</td>
+                                <td className='px-3 py-2'>{block.blockName}</td>
+                                <td className='px-3 py-2'>{block.gender}</td>
                                 <td className="px-3 py-2 text-nowrap">
                                 <Link
-                                    href={route("staff.rooms.edit", room.id)}
+                                    href={route("staff.blocks.edit", block.id)}
                                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                                 >
                                     Edit
                                 </Link>
                                 <Link
-                                    href={route("staff.rooms.allocate", room.id)}
-                                    className="font-medium text-green-600 dark:text-green-500 hover:underline mx-1"
+                                    href={route("staff.rooms.index")}
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                                 >
-                                    Allocate Student
+                                    View Rooms
                                 </Link>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <Pagination links={rooms.meta.links} />
+                <Pagination links={blocks.meta.links} />
             </div>
         </div>
     );
