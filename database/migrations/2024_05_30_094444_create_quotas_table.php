@@ -15,24 +15,25 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('userID');
             $table->foreign('userID')->references('id')->on('users');
-            $table->integer('active'); // 0 for inactive, 1 for active, 2 for pending
+            $table->string('active')->default('pending'); //Pending //Active //Inactive
+            $table->string('event')->nullable(); //Event file
             $table->string('firstRoomType')->nullable();
-            $table->unsignedBigInteger('firstRoomBlock')->nullable();
-            $table->foreign('firstRoomBlock')->references('id')->on('blocks');
-            $table->unsignedBigInteger('firstRoomID')->nullable();
-            $table->foreign('firstRoomID')->references('id')->on('rooms');
+            $table->string('firstRoomBlock')->nullable();
+            //$table->foreign('firstRoomBlock')->references('id')->on('blocks');
+            $table->string('firstRoomID')->nullable();
+            //$table->foreign('firstRoomID')->references('id')->on('rooms');
             $table->string('secondRoomType')->nullable();
-            $table->unsignedBigInteger('secondRoomBlock')->nullable();
-            $table->foreign('secondRoomBlock')->references('id')->on('blocks');
-            $table->unsignedBigInteger('secondRoomID')->nullable();
-            $table->foreign('secondRoomID')->references('id')->on('rooms');
+            $table->string('secondRoomBlock')->nullable();
+            //$table->foreign('secondRoomBlock')->references('id')->on('blocks');
+            $table->string('secondRoomID')->nullable();
+            //$table->foreign('secondRoomID')->references('id')->on('rooms');
             $table->string('thirdRoomType')->nullable();
-            $table->unsignedBigInteger('thirdRoomBlock')->nullable();
-            $table->foreign('thirdRoomBlock')->references('id')->on('blocks');
-            $table->unsignedBigInteger('thirdRoomID')->nullable();
-            $table->foreign('thirdRoomID')->references('id')->on('rooms');
-            $table->unsignedBigInteger('roommate')->nullable();
-            $table->foreign('roommate')->references('id')->on('users');
+            $table->string('thirdRoomBlock')->nullable();
+           // $table->foreign('thirdRoomBlock')->references('id')->on('blocks');
+            $table->string('thirdRoomID')->nullable();
+          //  $table->foreign('thirdRoomID')->references('id')->on('rooms');
+            $table->string('roommate')->nullable();
+            $table->string('roommateMatric')->nullable();
             $table->timestamps();
         });
     }

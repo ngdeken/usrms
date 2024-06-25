@@ -18,10 +18,6 @@ const ApplianceRegistration = ({auth, blocks, hostels, room, students}) => {
         post(route("staff.rooms.allocateStudent", { room: room.id }));
     };
 
-    const handleDeallocate = (e) => {
-        e.preventDefault();
-        post(route("staff.rooms.deallocateStudent", { room: room.id }));
-    };
 
     return (
         <div className="app-container">

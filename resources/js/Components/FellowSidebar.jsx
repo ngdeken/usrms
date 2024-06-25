@@ -17,7 +17,7 @@ const Sidebar = ({auth, user}) => {
             </nav>
             <div className="sidebar-footer">
                 <Link href={route('logout')} method="post" as="button">Logout</Link>
-                <p>Admin</p>
+                <p>Fellow</p>
                 <p>{user.name}</p>
             </div>
         </div>

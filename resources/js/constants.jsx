@@ -8,6 +8,16 @@ export const REPORT_STATUS_CLASS_MAP = {
     in_progress: "In Progress",
     completed: "Completed",
   };
+  export const QUOTA_STATUS_CLASS_MAP = {
+    pending: "bg-amber-500",
+    inactive: "bg-red-500 ",
+    active: "bg-green-500",
+  };
+  export const QUOTA_STATUS_TEXT_MAP = {
+    pending: "Pending",
+    inactive: "Inactive",
+    active: "Active",
+  };
   export const TASK_STATUS_CLASS_MAP = {
     pending: "bg-amber-500",
     in_progress: "bg-blue-500",

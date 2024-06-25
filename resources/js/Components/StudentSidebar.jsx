@@ -3,7 +3,7 @@ import React from 'react';
 import '../../css/Sidebar.css';
 import { Link } from '@inertiajs/react';
 
-const Sidebar = ({auth, user}) => {
+const Sidebar = ({auth, user, student}) => {
     return (
         <div className="sidebar">
             <div className="sidebar-header">
@@ -16,13 +16,14 @@ const Sidebar = ({auth, user}) => {
                     <li><a href="http://127.0.0.1:8000/student/report/view">Damage Report</a></li>
                     <li><a href="http://127.0.0.1:8000/student/quota">Active Quota Application</a></li>
                     <li><a href="http://127.0.0.1:8000/student/appliance">Appliances Registration</a></li>
+                    <li><a href="http://127.0.0.1:8000/student/matric">Update Matric Number</a></li>
                 </ul>
             </nav>
             <div className="sidebar-footer">
                 <Link href={route('logout')} method="post" as="button">Logout</Link>
                 <p>Student</p>
-                <p>KTDI M22 217</p>
                 <p>{user.name}</p>
+                {student && <p>Matric ID: {student.matricID}</p>}
             </div>
         </div>
     );

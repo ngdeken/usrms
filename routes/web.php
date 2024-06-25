@@ -15,8 +15,10 @@ use App\Http\Controllers\Staff\StaffHostelController;
 use App\Http\Controllers\Staff\StaffBlockController;
 use App\Http\Controllers\Staff\StaffRoomController;
 use App\Http\Controllers\Fellow\FellowDashboardController;
+use App\Http\Controllers\Fellow\FellowQuotaController;
 use App\Http\Controllers\Student\StudentApplianceController;
 use App\Http\Controllers\Student\StudentDashboardController;
+use App\Http\Controllers\Student\StudentMatricController;
 use App\Http\Controllers\Student\StudentReportController;
 use App\Http\Controllers\Student\StudentQuotaController;
 
@@ -86,6 +88,10 @@ Route::middleware(['auth', 'staff'])->group(function () {
 
 Route::middleware(['auth', 'fellow'])->group(function () {
     Route::get('fellow/dashboard', [FellowDashboardController::class, 'index'])->name('fellow.index');
+    Route::get('fellow/quota', [FellowQuotaController::class, 'index'])->name('fellow.quota');
+    Route::get('fellow/quota/{quota}', [FellowQuotaController::class, 'edit'])->name('fellow.quota.edit');
+    Route::put('fellow/quota/{quota}', [FellowQuotaController::class, 'update'])->name('fellow.quota.update');
+    Route::delete('fellow/quota/{quota}', [FellowQuotaController::class, 'destroy'])->name('fellow.quota.destroy');
 });
 
 Route::middleware(['auth', 'student'])->group(function () {
@@ -93,9 +99,13 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::get('student/report', [StudentReportController::class, 'index'])->name('student.report');
     Route::get('student/report/view', [StudentReportController::class, 'show'])->name('student.report.view');
     Route::get('student/quota', [StudentQuotaController::class, 'index'])->name('student.quota');
+    Route::get('student/quota/view', [StudentQuotaController::class, 'show'])->name('student.quota.show');
     Route::get('student/appliance', [StudentApplianceController::class, 'index'])->name('student.appliance');
+    Route::get('student/matric', [StudentMatricController::class, 'index'])->name('student.matric');
     Route::get('student/appliance/create', [StudentApplianceController::class, 'create'])->name('student.appliance.create');
     Route::post('student/appliance/create', [StudentApplianceController::class, 'store'])->name('student.appliance.store');
     Route::post('student/report', [StudentReportController::class, 'submit'])->name('student.report.submit');
+    Route::post('student/quota', [StudentQuotaController::class, 'store'])->name('student.quota.store');
+    Route::put('student/matric', [StudentMatricController::class, 'update'])->name('student.matric.update');
 });
 require __DIR__.'/auth.php';
