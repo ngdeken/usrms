@@ -19,9 +19,10 @@ class StudentResource extends JsonResource
             'matricID' => $this->matricID,
             'hostelID' => $this->hostelID,
             'userID' => new UserResource($this->user),
-            'blockID' => $this->blockID,
-            'roomID' => $this->roomID,
+            'blockID' => new BlockResource($this->block),
+            'roomID' => new RoomResource($this->room),
             'updated_by' => new UserResource($this->updatedBy),
+            'merit' => $this->merit,
         ];
     }
 }

@@ -18,7 +18,8 @@ class StaffRoomController extends Controller
     public function index()
     {
         $query = Room::query();
-
+        
+        $students = Student::with('user')->get();
         $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
 
@@ -30,6 +31,7 @@ class StaffRoomController extends Controller
         $rooms = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1)->withQueryString();
         return Inertia::render('Staff/StaffRoom', [
             "rooms" => RoomResource::collection($rooms),
+            'students' => $students,
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),
         ]);
@@ -93,6 +95,16 @@ class StaffRoomController extends Controller
         ]);
     }
 
+    public function deallocate(Room $room, Student $students)
+    {
+        //$students = Student::all();
+        $students = Student::with('user')->get();
+        return Inertia::render('Staff/StaffDeallocate', [
+            'room' => new RoomResource($room),
+            'students' => $students,
+        ]);
+    }
+
     public function allocateStudent(Request $request)
     {
         $request->validate([
@@ -114,5 +126,29 @@ class StaffRoomController extends Controller
         $room->save();
 
         return redirect()->route('staff.rooms.index')->with('success', 'Student allocated to the room successfully.');
+    }
+
+    public function deallocateStudent(Request $request)
+    {
+        $request->validate([
+            'studentID' => 'required|exists:students,id',
+        ]);
+
+        $student = Student::findOrFail($request->studentID);
+
+        if (!$student->roomID) {
+            return redirect()->back()->with('error', 'Student is not allocated to any room');
+        }
+
+        $room = Room::findOrFail($student->roomID);
+
+        $student->roomID = null;
+        $student->blockID = null;
+        $student->save();
+
+        $room->vacancy += 1;
+        $room->save();
+
+        return redirect()->route('staff.rooms.index')->with('success', 'Student deallocated from the room successfully.');
     }
 }

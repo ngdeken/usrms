@@ -15,4 +15,9 @@ class Room extends Model
     {
         return $this->belongsTo(Block::class, 'blockID');
     }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'roomID');
+    }
 }

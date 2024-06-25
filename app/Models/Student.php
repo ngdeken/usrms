@@ -22,5 +22,15 @@ class Student extends Model
     {
         return $this->belongsTo(User::class, 'userID');
     }
+
+    public function block()
+    {
+        return $this->belongsTo(Block::class, 'blockID');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'roomID');
+    }
 }
 

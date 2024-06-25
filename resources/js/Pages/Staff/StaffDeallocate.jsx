@@ -15,11 +15,6 @@ const ApplianceRegistration = ({auth, blocks, hostels, room, students}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("staff.rooms.allocateStudent", { room: room.id }));
-    };
-
-    const handleDeallocate = (e) => {
-        e.preventDefault();
         post(route("staff.rooms.deallocateStudent", { room: room.id }));
     };
 
@@ -50,11 +45,11 @@ const ApplianceRegistration = ({auth, blocks, hostels, room, students}) => {
                     </div>
                     <div className="mt-4">
                         <label>
-                            4. Student to Allocate
+                        4. Student to Deallocate
                             <div>
                                 <select name="studentID" value={data.studentID} onChange={(e) => setData("studentID", e.target.value)}>
                                     <option value="">Select Student</option>
-                                    {students.map(student => (
+                                    {students.filter(student => student.roomID === room.id).map(student => (
                                         <option key={student.id} value={student.id}>{student.user.name} {student.matricID}</option>
                                     ))}
                                 </select>
