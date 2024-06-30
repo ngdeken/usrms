@@ -16,33 +16,37 @@ use Inertia\Inertia;
 class FellowActiveController extends Controller
 {
     public function index()
-    {
-        $query = Active::query();
+{
+    $query = Active::with(['event', 'student.user']);
 
-        $sortField = request("sort_field", 'created_at');
-        $sortDirection = request("sort_direction", "desc");
+    $sortField = request("sort_field", 'created_at');
+    $sortDirection = request("sort_direction", "desc");
 
-        if (request("eventName")) {
-            $query->where("eventName", "like", "%" . request("eventName") . "%");
-        }
-        
-        if (request("eventDate")) {
-            $query->where("eventDate", "like", "%" . request("eventDate") . "%");
-        }
-
-        $actives = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1)->withQueryString();
-        return Inertia::render('Fellow/FellowActive', [
-            "actives" => ActiveResource::collection($actives),
-            'queryParams' => request()->query() ?: null,
-            'success' => session('success'),
-        ]);
+    if (request("eventName")) {
+        $query->whereHas('event', function ($q) {
+            $q->where("name", "like", "%" . request("eventName") . "%");
+        });
+    }
+    
+    if (request("eventDate")) {
+        $query->whereHas('event', function ($q) {
+            $q->where("date", "like", "%" . request("eventDate") . "%");
+        });
     }
 
-    public function create(Request $request, Event $events)
+    $actives = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1)->withQueryString();
+
+    return Inertia::render('Fellow/FellowActive', [
+        "actives" => ActiveResource::collection($actives),
+        'queryParams' => request()->query() ?: null,
+        'success' => session('success'),
+    ]);
+}
+    public function create(Request $request, Event $events, Student $students)
     {
         $events = Event::all();
         $students = Student::with('user')->get();
-        return Inertia::render('Fellow/FellowActiveCreate', ['events' => $events,
+        return Inertia::render('Fellow/FellowActiveCreate', ['events' => $events, 'students' => $students,
         ]);
     }
 
@@ -55,14 +59,17 @@ class FellowActiveController extends Controller
             'eventID' => 'required|integer',
         ]);
 
-        Active::create([
+        $active = Active::create([
             'position' => $request->position,
             'merit' => $request->merit,
+            'studentID' => $request->studentID,
             'eventID' => $request->eventID,
-            'hostelID' => $request->hostelID,
             'created_by' => Auth::id(),
             'updated_by' => Auth::id(),
         ]);
+
+        $student = Student::find($request->studentID);
+        $student->increment('merit', $request->merit);
 
         return to_route('fellow.actives.index')->with('success', 'Participation added successfully');
     }

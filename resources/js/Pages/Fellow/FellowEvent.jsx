@@ -124,6 +124,12 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
                                 >
                                     Edit
                                 </Link>
+                                <Link
+                                    href={route("fellow.actives.index")}
+                                    className="font-medium text-green-600 dark:text-green-500 hover:underline mx-1"
+                                >
+                                    View participation
+                                </Link>
                                 </td>
                             </tr>
                         ))}

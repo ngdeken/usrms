@@ -16,6 +16,7 @@ use App\Http\Controllers\Staff\StaffHostelController;
 use App\Http\Controllers\Staff\StaffBlockController;
 use App\Http\Controllers\Staff\StaffRoomController;
 use App\Http\Controllers\Fellow\FellowDashboardController;
+use App\Http\Controllers\Fellow\FellowActiveController;
 use App\Http\Controllers\Fellow\FellowEventController;
 use App\Http\Controllers\Fellow\FellowQuotaController;
 use App\Http\Controllers\Student\StudentApplianceController;
@@ -108,6 +109,9 @@ Route::middleware(['auth', 'fellow'])->group(function () {
     Route::get('fellow/events', [FellowEventController::class, 'index'])->name('fellow.events.index');
     Route::get('fellow/events/create', [FellowEventController::class, 'create'])->name('fellow.events.create');
     Route::get('fellow/events/{event}', [FellowEventController::class, 'edit'])->name('fellow.events.edit');
+    Route::get('fellow/actives', [FellowActiveController::class, 'index'])->name('fellow.actives.index');
+    Route::get('fellow/actives/create', [FellowActiveController::class, 'create'])->name('fellow.actives.create');
+    Route::post('fellow/actives/create', [FellowActiveController::class, 'store'])->name('fellow.actives.store');
     Route::post('fellow/events/create', [FellowEventController::class, 'store'])->name('fellow.events.store');
     Route::put('fellow/events/{event}', [FellowEventController::class, 'update'])->name('fellow.events.update');
     Route::put('fellow/quota/{quota}', [FellowQuotaController::class, 'update'])->name('fellow.quota.update');

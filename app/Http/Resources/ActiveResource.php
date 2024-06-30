@@ -16,10 +16,10 @@ class ActiveResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "studentID" => $this->studentID,
             "position" => $this->position,
             "merit" => $this->merit,
-            "eventID" => $this->eventID,
+            'eventID' => new EventResource($this->event),
+            'studentID' => new StudentResource($this->student),
         ];
     }
 }
