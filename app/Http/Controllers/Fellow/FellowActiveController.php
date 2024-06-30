@@ -1,0 +1,87 @@
+<?php
+
+namespace App\Http\Controllers\Fellow;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Event;
+use App\Models\Active;
+use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\EventResource;
+use App\Http\Resources\ActiveResource;
+use App\Http\Requests\UpdateEventRequest;
+use Inertia\Inertia;
+
+class FellowActiveController extends Controller
+{
+    public function index()
+    {
+        $query = Active::query();
+
+        $sortField = request("sort_field", 'created_at');
+        $sortDirection = request("sort_direction", "desc");
+
+        if (request("eventName")) {
+            $query->where("eventName", "like", "%" . request("eventName") . "%");
+        }
+        
+        if (request("eventDate")) {
+            $query->where("eventDate", "like", "%" . request("eventDate") . "%");
+        }
+
+        $actives = $query->orderBy($sortField, $sortDirection)->paginate(10)->onEachSide(1)->withQueryString();
+        return Inertia::render('Fellow/FellowActive', [
+            "actives" => ActiveResource::collection($actives),
+            'queryParams' => request()->query() ?: null,
+            'success' => session('success'),
+        ]);
+    }
+
+    public function create(Request $request, Event $events)
+    {
+        $events = Event::all();
+        $students = Student::with('user')->get();
+        return Inertia::render('Fellow/FellowActiveCreate', ['events' => $events,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'position' => 'required|string|max:255',
+            'merit' => 'required|integer',
+            'studentID' => 'required|integer',
+            'eventID' => 'required|integer',
+        ]);
+
+        Active::create([
+            'position' => $request->position,
+            'merit' => $request->merit,
+            'eventID' => $request->eventID,
+            'hostelID' => $request->hostelID,
+            'created_by' => Auth::id(),
+            'updated_by' => Auth::id(),
+        ]);
+
+        return to_route('fellow.actives.index')->with('success', 'Participation added successfully');
+    }
+
+    public function edit(Event $event)
+    {
+        
+        return Inertia::render('Fellow/FellowEventEdit', [
+            'event' => new EventResource($event),
+            
+        ]);
+    }
+
+    public function update(UpdateEventRequest $request, Event $event)
+    {
+        $data = $request->validated();
+        $data['updated_by'] = Auth::id();
+        $event->update($data);
+
+        return to_route('fellow.events.index')->with('success', 'Event edited successfully');
+    }
+}

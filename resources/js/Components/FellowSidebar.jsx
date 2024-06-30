@@ -13,6 +13,7 @@ const Sidebar = ({auth, user}) => {
                 <ul>
                     <li><a href="http://127.0.0.1:8000/fellow/dashboard">Home</a></li>
                     <li><a href="http://127.0.0.1:8000/fellow/quota">Manage Active Quota</a></li>
+                    <li><a href="http://127.0.0.1:8000/fellow/events">Manage Event</a></li>
                 </ul>
             </nav>
             <div className="sidebar-footer">

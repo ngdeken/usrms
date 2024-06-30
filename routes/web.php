@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\User;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Staff\StaffHostelController;
 use App\Http\Controllers\Staff\StaffBlockController;
 use App\Http\Controllers\Staff\StaffRoomController;
 use App\Http\Controllers\Fellow\FellowDashboardController;
+use App\Http\Controllers\Fellow\FellowEventController;
 use App\Http\Controllers\Fellow\FellowQuotaController;
 use App\Http\Controllers\Student\StudentApplianceController;
 use App\Http\Controllers\Student\StudentDashboardController;
@@ -32,6 +34,20 @@ use App\Http\Controllers\Student\StudentQuotaController;
 });*/
 
 Route::redirect('/', '/dashboard');
+
+/*Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        if (auth()->user()->isAdmin()) {
+            return redirect()->route('admin.index');
+        } elseif (auth()->user()->isStaff()) {
+            return redirect()->route('staff.index');
+        } elseif (auth()->user()->isFellow()) {
+            return redirect()->route('fellow.index');
+        } elseif (auth()->user()->isStudent()) {
+            return redirect()->route('student.index');
+        }
+    })->name('dashboard');
+});*/
 
 //Route::middleware('auth')->get('/dashboard', [DashboardController::class, 'index']);
 
@@ -53,11 +69,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/user/{user}', [AdminUserController::class, 'edit'])->name('admin.user.edit');
     Route::put('admin/user/{user}', [AdminUserController::class, 'update'])->name('admin.user.update');
     Route::delete('admin/user/{user}', [AdminUserController::class, 'destroy'])->name('admin.user.destroy');
-    //Route::resource('admin/user', AdminUserController::class);
 });
 
 Route::middleware(['auth', 'staff'])->group(function () {
-    Route::get('staff/dashboard', [StaffDashboardController::class, 'index']);
+    Route::get('staff/dashboard', [StaffDashboardController::class, 'index'])->name('staff.index');
     Route::get('staff/report', [StaffReportController::class, 'index'])->name('staff.report');
     Route::get('staff/report/{report}', [StaffReportController::class, 'edit'])->name('staff.report.edit');
     Route::get('staff/appliance', [StaffApplianceController::class, 'index'])->name('staff.appliance');
@@ -90,12 +105,17 @@ Route::middleware(['auth', 'fellow'])->group(function () {
     Route::get('fellow/dashboard', [FellowDashboardController::class, 'index'])->name('fellow.index');
     Route::get('fellow/quota', [FellowQuotaController::class, 'index'])->name('fellow.quota');
     Route::get('fellow/quota/{quota}', [FellowQuotaController::class, 'edit'])->name('fellow.quota.edit');
+    Route::get('fellow/events', [FellowEventController::class, 'index'])->name('fellow.events.index');
+    Route::get('fellow/events/create', [FellowEventController::class, 'create'])->name('fellow.events.create');
+    Route::get('fellow/events/{event}', [FellowEventController::class, 'edit'])->name('fellow.events.edit');
+    Route::post('fellow/events/create', [FellowEventController::class, 'store'])->name('fellow.events.store');
+    Route::put('fellow/events/{event}', [FellowEventController::class, 'update'])->name('fellow.events.update');
     Route::put('fellow/quota/{quota}', [FellowQuotaController::class, 'update'])->name('fellow.quota.update');
     Route::delete('fellow/quota/{quota}', [FellowQuotaController::class, 'destroy'])->name('fellow.quota.destroy');
 });
 
 Route::middleware(['auth', 'student'])->group(function () {
-    Route::get('student/dashboard', [StudentDashboardController::class, 'index']);
+    Route::get('student/dashboard', [StudentDashboardController::class, 'index'])->name('student.index');
     Route::get('student/report', [StudentReportController::class, 'index'])->name('student.report');
     Route::get('student/report/view', [StudentReportController::class, 'show'])->name('student.report.view');
     Route::get('student/quota', [StudentQuotaController::class, 'index'])->name('student.quota');

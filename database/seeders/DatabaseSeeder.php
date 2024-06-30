@@ -21,28 +21,28 @@ class DatabaseSeeder extends Seeder
                     'email' => 'deken0923@gmail.com',
                     'password' => bcrypt('password'),
                     'role' => '1',
-                    'gender' => 'M',
+                    //'gender' => 'M',
                 ],
                 [
                     'name' => 'Develop',
                     'email' => 'developing923@gmail.com',
                     'password' => bcrypt('password'),
                     'role' => '2',
-                    'gender' => 'M',
+                    //'gender' => 'M',
                 ],
                 [
                     'name' => 'Woon',
                     'email' => 'woon@gmail.com',
                     'password' => bcrypt('password'),
                     'role' => '3',
-                    'gender' => 'M',
+                    //'gender' => 'M',
                 ],
                 [
                     'name' => 'Tan',
                     'email' => 'tan@gmail.com',
                     'password' => bcrypt('password'),
                     'role' => '4',
-                    'gender' => 'F',
+                    //'gender' => 'F',
                 ],
                 // Add more names here
             ]);

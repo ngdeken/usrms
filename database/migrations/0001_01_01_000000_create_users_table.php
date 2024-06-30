@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->integer('role')->default(4); //1 = admin; 2 = staff; 3 = fellow; 4 = student
-            $table->char('gender');
+            //$table->char('gender');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

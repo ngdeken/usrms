@@ -52,4 +52,24 @@ class User extends Authenticatable
     {
         return $this->hasOne(Student::class, 'userID', 'id');
     }
+
+    public function isAdmin()
+    {
+        return $this->role === '1';
+    }
+
+    public function isStaff()
+    {
+        return $this->role === '2';
+    }
+
+    public function isFellow()
+    {
+        return $this->role === '3';
+    }
+
+    public function isStudent()
+    {
+        return $this->role === '4';
+    }
 }

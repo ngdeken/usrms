@@ -25,7 +25,7 @@ const StaffReport = ({ auth, reports, queryParams = null, success }) => {
         delete queryParams[name];
         }
 
-        router.get(route("student.report.view"), queryParams);
+        router.get(route("staff.report"), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -45,7 +45,7 @@ const StaffReport = ({ auth, reports, queryParams = null, success }) => {
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
       }
-      router.get(route("student.report.view"), queryParams);
+      router.get(route("staff.report"), queryParams);
     };
 
     const onSubmit = (e) => {

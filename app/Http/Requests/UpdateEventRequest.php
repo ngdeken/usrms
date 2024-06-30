@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class StoreUserRequest extends FormRequest
+class UpdateEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +22,9 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["required", "string", "max:255"],
-            "email" => ["required", "string", "email", "unique:users,email"],
-            "password" => [
-                "required",
-                Password::min(8)->letters(),
-            ],
-            "role" => ["required", "integer", "max:4"],
-            //"gender" => ["required", "string", "max:1"],
+            'hostelID' => ['required', 'integer'],
+            'eventName' => ['required', 'string', 'max:255'],
+            'eventDate' => ['required', 'date'],
         ];
     }
 }

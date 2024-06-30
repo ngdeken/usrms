@@ -49,10 +49,6 @@ const AdminUserEdit = ({ auth, user }) => {
                     4. Role
                     <input type="text" name="role" value={data.role} onChange={(e) => setData("role", e.target.value)} />
                 </label>
-                <label>
-                    5. Gender
-                    <input type="text" name="gender" value={data.gender} onChange={(e) => setData("gender", e.target.value)} />
-                </label>
                 <button type="submit">Submit</button>
             </form>
         </div>

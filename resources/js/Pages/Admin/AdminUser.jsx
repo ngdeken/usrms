@@ -96,14 +96,6 @@ const AdminUser = ({ auth, users, queryParams = null, success }) => {
                             Role (1=Admin, 2=Staff, 3=Fellow, 4=Student)
                         </TableHeading>
                         <TableHeading
-                            name="gender"
-                            sort_field={queryParams.sort_field}
-                            sort_direction={queryParams.sort_direction}
-                            sortChanged={sortChanged}
-                        >
-                            Gender
-                        </TableHeading>
-                        <TableHeading
                             name="created_at"
                             sort_field={queryParams.sort_field}
                             sort_direction={queryParams.sort_direction}
@@ -150,7 +142,6 @@ const AdminUser = ({ auth, users, queryParams = null, success }) => {
                                 <td className='px-3 py-3'>{user.email}</td>
                                 <td className='px-3 py-3'>{user.name}</td>
                                 <td className='px-3 py-3'>{user.role}</td>
-                                <td className='px-3 py-3'>{user.gender}</td>
                                 <td className='px-3 py-3'>{new Date(user.created_at).toLocaleString()}</td>
                                 <td className="px-3 py-3 text-nowrap">
                                 <Link
