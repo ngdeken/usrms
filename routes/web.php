@@ -111,11 +111,14 @@ Route::middleware(['auth', 'fellow'])->group(function () {
     Route::get('fellow/events/{event}', [FellowEventController::class, 'edit'])->name('fellow.events.edit');
     Route::get('fellow/actives', [FellowActiveController::class, 'index'])->name('fellow.actives.index');
     Route::get('fellow/actives/create', [FellowActiveController::class, 'create'])->name('fellow.actives.create');
+    Route::get('fellow/actives/{active}', [FellowActiveController::class, 'edit'])->name('fellow.actives.edit');
     Route::post('fellow/actives/create', [FellowActiveController::class, 'store'])->name('fellow.actives.store');
     Route::post('fellow/events/create', [FellowEventController::class, 'store'])->name('fellow.events.store');
+    Route::put('fellow/actives/{active}', [FellowActiveController::class, 'update'])->name('fellow.actives.update');
     Route::put('fellow/events/{event}', [FellowEventController::class, 'update'])->name('fellow.events.update');
     Route::put('fellow/quota/{quota}', [FellowQuotaController::class, 'update'])->name('fellow.quota.update');
     Route::delete('fellow/quota/{quota}', [FellowQuotaController::class, 'destroy'])->name('fellow.quota.destroy');
+    Route::delete('fellow/actives/{active}', [FellowActiveController::class, 'destroy'])->name('fellow.actives.destroy');
 });
 
 Route::middleware(['auth', 'student'])->group(function () {

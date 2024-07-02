@@ -33,6 +33,13 @@ const FellowActive = ({ auth, events, actives, queryParams = null, success }) =>
         router.get(route("fellow.actives.index"), queryParams);
     };
 
+    const deleteActive = (active) => {
+        if (!window.confirm("Are you sure you want to delete the record?")) {
+          return;
+        }
+        router.delete(route("fellow.actives.destroy", active.id));
+      };
+
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
@@ -57,9 +64,6 @@ const FellowActive = ({ auth, events, actives, queryParams = null, success }) =>
                             <th className="px-2 py-2">
                                 <TextInput className="w-full" defaultValue={queryParams.eventName} placeholder="Event" onBlur={(e) => searchFieldChanged("eventName", e.target.value)} onKeyPress={(e) => onKeyPress("eventName", e)} />
                             </th>
-                            <th className="px-2 py-2">
-                                <TextInput className="w-full" defaultValue={queryParams.eventDate} placeholder="Date" onBlur={(e) => searchFieldChanged("eventDate", e.target.value)} onKeyPress={(e) => onKeyPress("eventDate", e)} />
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +75,19 @@ const FellowActive = ({ auth, events, actives, queryParams = null, success }) =>
                                 <td className='px-3 py-2'>{active.position}</td>
                                 <td className='px-3 py-2'>{active.merit}</td>
                                 <td className="px-3 py-2 text-nowrap">
-                                    
+                                <Link
+                                    href={route("fellow.actives.edit", active.id)}
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                >
+                                    Edit
+                                </Link>
+                                
+                                <button
+                                    onClick={(e) => deleteActive(active)}
+                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
+                                >
+                                    Delete
+                                </button>    
                                 </td>
                             </tr>
                         ))}

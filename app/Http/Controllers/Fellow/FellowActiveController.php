@@ -10,7 +10,7 @@ use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\ActiveResource;
-use App\Http\Requests\UpdateEventRequest;
+use App\Http\Requests\UpdateActiveRequest;
 use Inertia\Inertia;
 
 class FellowActiveController extends Controller
@@ -74,21 +74,30 @@ class FellowActiveController extends Controller
         return to_route('fellow.actives.index')->with('success', 'Participation added successfully');
     }
 
-    public function edit(Event $event)
+    public function edit(Event $event, Active $active)
     {
         
-        return Inertia::render('Fellow/FellowEventEdit', [
-            'event' => new EventResource($event),
-            
+        return Inertia::render('Fellow/FellowActiveEdit', [
+            'active' => new ActiveResource($active),
         ]);
     }
 
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(UpdateActiveRequest $request, Active $active)
     {
         $data = $request->validated();
         $data['updated_by'] = Auth::id();
-        $event->update($data);
+        $active->update($data);
 
-        return to_route('fellow.events.index')->with('success', 'Event edited successfully');
+        return to_route('fellow.actives.index')->with('success', 'Participation edited successfully');
+    }
+
+    public function destroy(Active $active)
+    {
+        $student = $active->student;
+        $student->decrement('merit', $active->merit);
+
+        $active->delete();
+
+        return to_route('fellow.actives.index')->with('success', 'Participation deleted successfully');
     }
 }
