@@ -80,4 +80,13 @@ class FellowEventController extends Controller
 
         return to_route('fellow.events.index')->with('success', 'Event edited successfully');
     }
+
+    public function destroy(Event $event)
+    {
+        $eventID = $event->id;
+        $event->delete();
+        
+        return to_route('fellow.events.index')
+            ->with('success', "Event \"$eventID\" was deleted");
+    }
 }

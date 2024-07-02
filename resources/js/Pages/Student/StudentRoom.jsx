@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../../Components/FellowSidebar';
+import Sidebar from '../../Components/StudentSidebar';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import Pagination from "@/Components/Pagination";
 import {
@@ -11,7 +11,7 @@ import TextInput from "@/Components/TextInput";
 import TableHeading from "@/Components/TableHeading";
 import '../../../css/StudentReport.css';
 
-const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => {
+const StudentReportView = ({ auth, rooms, students, queryParams = null, success }) => {
     queryParams = queryParams || {};
     const searchFieldChanged = (name, value) => {
         if (value) {
@@ -20,7 +20,7 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
         delete queryParams[name];
         }
 
-        router.get(route("fellow.events.index"), queryParams);
+        router.get(route("student.rooms.index"), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -40,23 +40,15 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
       }
-      router.get(route("fellow.events.index"), queryParams);
+      router.get(route("student.rooms.index"), queryParams);
     };
-
-    const deleteEvent = (event) => {
-        if (!window.confirm("Are you sure you want to delete the event?")) {
-          return;
-        }
-        router.delete(route("fellow.events.destroy", event.id));
-      };
 
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
             <div className="damage-report-form-container">
                 <header className="form-header">
-                    <h1>Event Management</h1>
-                    <a href="http://127.0.0.1:8000/fellow/events/create" className="view-report-link">Add Event</a>
+                    <h1>Room List</h1>
                 </header>
                 <table>
                     <thead>
@@ -67,23 +59,47 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
                             sort_direction={queryParams.sort_direction}
                             sortChanged={sortChanged}
                         >
-                        ID
+                            ID
                         </TableHeading>
                         <TableHeading
-                            name="event"
+                            name="block"
                             sort_field={queryParams.sort_field}
                             sort_direction={queryParams.sort_direction}
                             sortChanged={sortChanged}
                         >
-                            Event
+                            Block
                         </TableHeading>
                         <TableHeading
-                            name="date"
+                            name="room"
                             sort_field={queryParams.sort_field}
                             sort_direction={queryParams.sort_direction}
                             sortChanged={sortChanged}
                         >
-                            Date
+                            Room
+                        </TableHeading>
+                        <TableHeading
+                            name="floor"
+                            sort_field={queryParams.sort_field}
+                            sort_direction={queryParams.sort_direction}
+                            sortChanged={sortChanged}
+                        >
+                            Floor
+                        </TableHeading>
+                        <TableHeading
+                            name="roomType"
+                            sort_field={queryParams.sort_field}
+                            sort_direction={queryParams.sort_direction}
+                            sortChanged={sortChanged}
+                        >
+                            Room Type
+                        </TableHeading>
+                        <TableHeading
+                            name="vacancy"
+                            sort_field={queryParams.sort_field}
+                            sort_direction={queryParams.sort_direction}
+                            sortChanged={sortChanged}
+                        >
+                            Vacancy
                         </TableHeading>
                         </tr>
                     </thead>
@@ -94,64 +110,50 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
                         <th className="px-2 py-2">
                         <TextInput
                           className="w-full"
-                          defaultValue={queryParams.eventName}
-                          placeholder="Event"
+                          defaultValue={queryParams.hostelName}
+                          placeholder="Block"
                           onBlur={(e) =>
-                            searchFieldChanged("eventName", e.target.value)
+                            searchFieldChanged("blockName", e.target.value)
                           }
-                          onKeyPress={(e) => onKeyPress("eventName", e)}
+                          onKeyPress={(e) => onKeyPress("blockName", e)}
                         />
                         </th>
-                
+                        
                         <th className="px-2 py-2">
                         <TextInput
                           className="w-full"
-                          defaultValue={queryParams.eventDate}
-                          placeholder="Date"
+                          defaultValue={queryParams.roomID}
+                          placeholder="Room"
                           onBlur={(e) =>
-                            searchFieldChanged("eventDate", e.target.value)
+                            searchFieldChanged("roomID", e.target.value)
                           }
-                          onKeyPress={(e) => onKeyPress("eventDate", e)}
+                          onKeyPress={(e) => onKeyPress("roomID", e)}
                         />
                         </th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        {events.data.map((event) => (
-                            <tr key={event.id}>
-                                <td className='px-3 py-2'>{event.id}</td>
-                                <td className='px-3 py-2'>{event.eventName}</td>
-                                <td className='px-3 py-2'>{event.eventDate}</td>
-                                <td className='px-3 py-2'>{event.hostelID.hostelName}</td>
+                        {rooms.data.map((room) => (
+                            <tr key={room.id}>
+                                <td className='px-3 py-2'>{room.id}</td>
+                                <td className='px-3 py-2'>{room.blockID.blockName}</td>
+                                <td className='px-3 py-2'>{room.roomID}</td>
+                                <td className='px-3 py-2'>{room.floor}</td>
+                                <td className='px-3 py-2'>{room.roomType}</td>
+                                <td className='px-3 py-2'>{room.vacancy}</td>
+                                
                                 <td className="px-3 py-2 text-nowrap">
-                                <Link
-                                    href={route("fellow.actives.index")}
-                                    className="font-medium text-green-600 dark:text-green-500 hover:underline mx-1"
-                                >
-                                    View participation
-                                </Link>
-                                <Link
-                                    href={route("fellow.events.edit", event.id)}
-                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
-                                >
-                                    Edit
-                                </Link>
-                                <button
-                                    onClick={(e) => deleteEvent(event)}
-                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
-                                >
-                                    Delete
-                                </button>
+                                
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <Pagination links={events.meta.links} />
+                <Pagination links={rooms.meta.links} />
             </div>
         </div>
     );
 };
 
-export default FellowEvent;
+export default StudentReportView;

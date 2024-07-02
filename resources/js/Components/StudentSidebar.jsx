@@ -17,6 +17,8 @@ const Sidebar = ({auth, user, student}) => {
                     <li><a href="http://127.0.0.1:8000/student/quota">Active Quota Application</a></li>
                     <li><a href="http://127.0.0.1:8000/student/appliance">Appliances Registration</a></li>
                     <li><a href="http://127.0.0.1:8000/student/matric">Update Matric Number</a></li>
+                    <li><a href="http://127.0.0.1:8000/student/events">View Events</a></li>
+                    <li><a href="http://127.0.0.1:8000/student/rooms">View Rooms</a></li>
                 </ul>
             </nav>
             <div className="sidebar-footer">

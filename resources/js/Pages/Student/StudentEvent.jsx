@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Sidebar from '../../Components/FellowSidebar';
+import Sidebar from '../../Components/StudentSidebar';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import Pagination from "@/Components/Pagination";
 import {
@@ -20,7 +20,7 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
         delete queryParams[name];
         }
 
-        router.get(route("fellow.events.index"), queryParams);
+        router.get(route("student.events.index"), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -40,23 +40,15 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
       }
-      router.get(route("fellow.events.index"), queryParams);
+      router.get(route("student.events.index"), queryParams);
     };
-
-    const deleteEvent = (event) => {
-        if (!window.confirm("Are you sure you want to delete the event?")) {
-          return;
-        }
-        router.delete(route("fellow.events.destroy", event.id));
-      };
 
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
             <div className="damage-report-form-container">
                 <header className="form-header">
-                    <h1>Event Management</h1>
-                    <a href="http://127.0.0.1:8000/fellow/events/create" className="view-report-link">Add Event</a>
+                    <h1>Event List</h1>
                 </header>
                 <table>
                     <thead>
@@ -126,23 +118,11 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
                                 <td className='px-3 py-2'>{event.hostelID.hostelName}</td>
                                 <td className="px-3 py-2 text-nowrap">
                                 <Link
-                                    href={route("fellow.actives.index")}
+                                    href={route("student.events.active", event.id)}
                                     className="font-medium text-green-600 dark:text-green-500 hover:underline mx-1"
                                 >
                                     View participation
                                 </Link>
-                                <Link
-                                    href={route("fellow.events.edit", event.id)}
-                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
-                                >
-                                    Edit
-                                </Link>
-                                <button
-                                    onClick={(e) => deleteEvent(event)}
-                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
-                                >
-                                    Delete
-                                </button>
                                 </td>
                             </tr>
                         ))}
