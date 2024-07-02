@@ -43,6 +43,13 @@ const StudentReportView = ({ auth, rooms, students, queryParams = null, success 
       router.get(route("staff.rooms.index"), queryParams);
     };
 
+    const deleteReport = (room) => {
+        if (!window.confirm("Are you sure you want to delete the room?")) {
+          return;
+        }
+        router.delete(route("staff.rooms.destroy", room.id));
+      };
+
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
@@ -146,10 +153,10 @@ const StudentReportView = ({ auth, rooms, students, queryParams = null, success 
                                 
                                 <td className="px-3 py-2 text-nowrap">
                                 <Link
-                                    href={route("staff.rooms.edit", room.id)}
-                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                    href={route("staff.allocate.index")}
+                                    className="font-medium text-yellow-600 dark:text-yellow-500 hover:underline mx-1"
                                 >
-                                    Edit
+                                    View Allocate List
                                 </Link>
                                 <Link
                                     href={route("staff.rooms.allocate", room.id)}
@@ -164,11 +171,17 @@ const StudentReportView = ({ auth, rooms, students, queryParams = null, success 
                                     Deallocate Student
                                 </Link>
                                 <Link
-                                    href={route("staff.allocate.index")}
-                                    className="font-medium text-yellow-600 dark:text-yellow-500 hover:underline mx-1"
+                                    href={route("staff.rooms.edit", room.id)}
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                                 >
-                                    View Allocate List
+                                    Edit
                                 </Link>
+                                <button
+                                    onClick={(e) => deleteReport(room)}
+                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
+                                >
+                                    Delete
+                                </button>
                                 </td>
                             </tr>
                         ))}

@@ -69,6 +69,7 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::get('staff/appliance/{order}', [StaffApplianceController::class, 'edit'])->name('staff.appliance.edit');
     Route::get('staff/hostels', [StaffHostelController::class, 'index'])->name('staff.hostels.index');
     Route::get('staff/hostels/create', [StaffHostelController::class, 'create'])->name('staff.hostels.create');
+    Route::get('staff/hostels/edit/{hostel}', [StaffHostelController::class, 'edithostel'])->name('staff.hostels.edithostel');
     Route::get('staff/hostels/{hostel}', [StaffHostelController::class, 'edit'])->name('staff.hostels.edit');
     Route::get('staff/blocks/create', [StaffBlockController::class, 'create'])->name('staff.blocks.create');
     Route::get('staff/rooms', [StaffRoomController::class, 'index'])->name('staff.rooms.index');
@@ -82,6 +83,7 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::post('staff/blocks/create', [StaffBlockController::class, 'store'])->name('staff.blocks.store');
     Route::post('staff/rooms/create', [StaffRoomController::class, 'store'])->name('staff.rooms.store');
     Route::get('staff/blocks/{block}', [StaffBlockController::class, 'edit'])->name('staff.blocks.edit');
+    Route::put('staff/hostels/{hostel}', [StaffHostelController::class, 'update'])->name('staff.hostels.update');
     Route::put('staff/rooms/{room}/allocate', [StaffRoomController::class, 'allocateStudent'])->name('staff.rooms.allocateStudent');
     Route::put('staff/rooms/{room}/deallocate', [StaffRoomController::class, 'deallocateStudent'])->name('staff.rooms.deallocateStudent');
     Route::put('staff/report/{report}', [StaffReportController::class, 'update'])->name('staff.report.update');
@@ -89,6 +91,8 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::put('staff/appliance/{order}', [StaffApplianceController::class, 'update'])->name('staff.appliance.update');
     Route::delete('staff/appliance/{order}', [StaffApplianceController::class, 'destroy'])->name('staff.appliance.destroy');
     Route::put('staff/blocks/{block}', [StaffBlockController::class, 'update'])->name('staff.blocks.update');
+    Route::delete('staff/blocks/{block}', [StaffBlockController::class, 'destroy'])->name('staff.blocks.destroy');
+    Route::delete('staff/rooms/{room}', [StaffRoomController::class, 'destroy'])->name('staff.rooms.destroy');
     Route::put('staff/rooms/{room}', [StaffRoomController::class, 'update'])->name('staff.rooms.update');
 });
 

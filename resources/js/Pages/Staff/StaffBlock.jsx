@@ -43,6 +43,13 @@ const StudentReportView = ({ auth, blocks, queryParams = null, success }) => {
       router.get(route("staff.blocks.index"), queryParams);
     };
 
+    const deleteReport = (block) => {
+        if (!window.confirm("Are you sure you want to delete the block?")) {
+          return;
+        }
+        router.delete(route("staff.blocks.destroy", block.id));
+      };
+
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
@@ -119,17 +126,23 @@ const StudentReportView = ({ auth, blocks, queryParams = null, success }) => {
                                 <td className='px-3 py-2'>{block.gender}</td>
                                 <td className="px-3 py-2 text-nowrap">
                                 <Link
+                                    href={route("staff.rooms.index")}
+                                    className="font-medium text-green-600 dark:text-green-500 hover:underline mx-1"
+                                >
+                                    View Rooms
+                                </Link>
+                                <Link
                                     href={route("staff.blocks.edit", block.id)}
                                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                                 >
                                     Edit
                                 </Link>
-                                <Link
-                                    href={route("staff.rooms.index")}
-                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                <button
+                                    onClick={(e) => deleteReport(block)}
+                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                                 >
-                                    View Rooms
-                                </Link>
+                                    Delete
+                                </button>
                                 </td>
                             </tr>
                         ))}

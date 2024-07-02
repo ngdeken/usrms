@@ -9,6 +9,7 @@ use App\Models\Block;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\HostelResource;
 use App\Http\Resources\BlockResource;
+use App\Http\Requests\UpdateHostelRequest;
 use Inertia\Inertia;
 
 class StaffHostelController extends Controller
@@ -74,4 +75,30 @@ class StaffHostelController extends Controller
             'success' => session('success'),
         ]);
     }
+
+    public function edithostel(Hostel $hostel)
+    {
+        return Inertia::render('Staff/StaffHostelEdit', [
+            'hostel' => new HostelResource($hostel),
+        ]);
+    }
+
+    public function update(UpdateHostelRequest $request, Hostel $hostel)
+    {
+        $data = $request->validated();
+        $data['updated_by'] = Auth::id();
+        $hostel->update($data);
+
+        return redirect()->route('staff.hostels.index', ['room' => $request->id])->with('success', 'Hostel edited successfully.');
+    }
+
+    public function destroy(Hostel $hostel)
+    {
+        $hostelID = $hostel->id;
+        $hostel->delete();
+        
+        return to_route('staff.hostels.index')
+            ->with('success', "Report \"$hostelID\" was deleted");
+    }
+    
 }

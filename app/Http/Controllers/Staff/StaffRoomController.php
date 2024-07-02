@@ -151,4 +151,13 @@ class StaffRoomController extends Controller
 
         return redirect()->route('staff.rooms.index')->with('success', 'Student deallocated from the room successfully.');
     }
+
+    public function destroy(Room $room)
+    {
+        $roomID = $room->id;
+        $room->delete();
+
+        return to_route('staff.rooms.index')
+            ->with('success', "Room \"$roomID\" was deleted");
+    }
 }

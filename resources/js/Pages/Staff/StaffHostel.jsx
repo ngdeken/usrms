@@ -43,6 +43,13 @@ const StudentReportView = ({ auth, hostels, queryParams = null, success }) => {
       router.get(route("staff.hostels.index"), queryParams);
     };
 
+    const deleteReport = (hostel) => {
+        if (!window.confirm("Are you sure you want to delete the hostel?")) {
+          return;
+        }
+        router.delete(route("staff.hostels.destroy", hostel.id));
+      };
+
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
@@ -99,10 +106,23 @@ const StudentReportView = ({ auth, hostels, queryParams = null, success }) => {
                                 <td className="px-3 py-2 text-nowrap">
                                 <Link
                                     href={route("staff.hostels.edit", hostel.id)}
-                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                    className="font-medium text-green-600 dark:text-green-500 hover:underline mx-1"
                                 >
                                     View Block
                                 </Link>
+                                <Link
+                                    href={route("staff.hostels.edithostel", hostel.id)}
+                                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                                >
+                                    Edit
+                                </Link>
+                                
+                                <button
+                                    onClick={(e) => deleteReport(hostel)}
+                                    className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
+                                >
+                                    Delete
+                                </button>
                                 </td>
                             </tr>
                         ))}

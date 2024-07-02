@@ -43,6 +43,13 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
       router.get(route("staff.appliance"), queryParams);
     };
 
+    const deleteReport = (order) => {
+        if (!window.confirm("Are you sure you want to delete the registration?")) {
+          return;
+        }
+        router.delete(route("staff.appliance.destroy", order.id));
+      };
+
     return (
         <div className="app-container">
             <Sidebar user={auth.user}/>
@@ -172,7 +179,7 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
                                 </Link>
                                 
                                 <button
-                                    onClick={(e) => deleteReport(report)}
+                                    onClick={(e) => deleteReport(order)}
                                     className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                                 >
                                     Delete

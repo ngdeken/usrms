@@ -77,4 +77,13 @@ class StaffBlockController extends Controller
 
         return redirect()->route('staff.hostels.edit', ['hostel' => $request->hostelID])->with('success', 'Block edited successfully.');
     }
+
+    public function destroy(Block $block)
+    {
+        $blockID = $block->id;
+        $block->delete();
+        
+        return to_route('staff.hostels.edit')
+            ->with('success', "Block \"$blockID\" was deleted");
+    }
 }
