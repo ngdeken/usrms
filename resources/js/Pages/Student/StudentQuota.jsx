@@ -72,7 +72,7 @@ const StudentQuota = ({ auth }) => {
                     </div>
                 </label>
                 <label>
-                    5. Upload other activities not oragnized by JKM
+                    5. Upload other activities not organized by JKM
                     <input type="file" name="event" onChange={(e) => setData("event", e.target.files[0])} />
                 </label>
                 

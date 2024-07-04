@@ -85,6 +85,14 @@ const StudentReportView = ({ auth, blocks, queryParams = null, success }) => {
                         >
                             Block
                         </TableHeading>
+                        <TableHeading
+                            name="gender"
+                            sort_field={queryParams.sort_field}
+                            sort_direction={queryParams.sort_direction}
+                            sortChanged={sortChanged}
+                        >
+                            Gender
+                        </TableHeading>
                         </tr>
                     </thead>
                     <thead>
