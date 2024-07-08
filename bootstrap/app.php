@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'staff' => \App\Http\Middleware\Staff::class,
             'fellow' => \App\Http\Middleware\Fellow::class,
             'student' => \App\Http\Middleware\Student::class,
+            \App\Http\Middleware\ForceHttps::class,
         ]);
         //
     })

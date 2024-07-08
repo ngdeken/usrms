@@ -134,3 +134,4 @@ Route::middleware(['auth', 'student'])->group(function () {
     Route::put('student/matric', [StudentMatricController::class, 'update'])->name('student.matric.update');
 });
 require __DIR__.'/auth.php';
+
