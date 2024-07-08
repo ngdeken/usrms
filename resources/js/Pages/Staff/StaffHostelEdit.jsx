@@ -10,7 +10,7 @@ const StudentReport = ({ auth, hostel }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route("staff.hostels.update"));
+        post(route("staff.hostels.update", { hostel: hostel.id }));
     };
 
     return (

@@ -12,13 +12,13 @@ const Sidebar = ({auth, user, student}) => {
             </div>
             <nav className="sidebar-nav">
                 <ul>
-                    <li><a href="http://127.0.0.1:8000/student/dashboard">Home</a></li>
-                    <li><a href="http://127.0.0.1:8000/student/report/view">Damage Report</a></li>
-                    <li><a href="http://127.0.0.1:8000/student/quota">Active Quota Application</a></li>
-                    <li><a href="http://127.0.0.1:8000/student/appliance">Appliances Registration</a></li>
-                    <li><a href="http://127.0.0.1:8000/student/matric">Update Matric Number</a></li>
-                    <li><a href="http://127.0.0.1:8000/student/events">View Events</a></li>
-                    <li><a href="http://127.0.0.1:8000/student/rooms">View Rooms</a></li>
+                    <li><a href={route('student.index')}>Home</a></li>
+                    <li><a href={route('student.report')}>Damage Report</a></li>
+                    <li><a href={route('student.quota')}>Active Quota Application</a></li>
+                    <li><a href={route('student.appliance')}>Appliances Registration</a></li>
+                    <li><a href={route('student.matric')}>Update Matric Number</a></li>
+                    <li><a href={route('student.events.index')}>View Events</a></li>
+                    <li><a href={route('student.rooms.index')}>View Rooms</a></li>
                 </ul>
             </nav>
             <div className="sidebar-footer">

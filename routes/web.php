@@ -83,7 +83,7 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::post('staff/blocks/create', [StaffBlockController::class, 'store'])->name('staff.blocks.store');
     Route::post('staff/rooms/create', [StaffRoomController::class, 'store'])->name('staff.rooms.store');
     Route::get('staff/blocks/{block}', [StaffBlockController::class, 'edit'])->name('staff.blocks.edit');
-    Route::put('staff/hostels/{hostel}', [StaffHostelController::class, 'update'])->name('staff.hostels.update');
+    Route::put('staff/hostels/edit/{hostel}', [StaffHostelController::class, 'update'])->name('staff.hostels.update');
     Route::put('staff/rooms/{room}/allocate', [StaffRoomController::class, 'allocateStudent'])->name('staff.rooms.allocateStudent');
     Route::put('staff/rooms/{room}/deallocate', [StaffRoomController::class, 'deallocateStudent'])->name('staff.rooms.deallocateStudent');
     Route::put('staff/report/{report}', [StaffReportController::class, 'update'])->name('staff.report.update');

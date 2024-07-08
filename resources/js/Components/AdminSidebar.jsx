@@ -11,8 +11,8 @@ const Sidebar = ({auth, user}) => {
             </div>
             <nav className="sidebar-nav">
                 <ul>
-                    <li><a href="http://127.0.0.1:8000/admin/dashboard">Home</a></li>
-                    <li><a href="http://127.0.0.1:8000/admin/user">Manage User</a></li>
+                    <li><a href={route('admin.index')}>Home</a></li>
+                    <li><a href={route('admin.user')}>Manage User</a></li>
                 </ul>
             </nav>
             <div className="sidebar-footer">

@@ -89,7 +89,7 @@ class StaffHostelController extends Controller
         $data['updated_by'] = Auth::id();
         $hostel->update($data);
 
-        return redirect()->route('staff.hostels.index', ['room' => $request->id])->with('success', 'Hostel edited successfully.');
+        return redirect()->route('staff.hostels.index')->with('success', 'Hostel edited successfully.');
     }
 
     public function destroy(Hostel $hostel)

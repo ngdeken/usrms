@@ -11,11 +11,11 @@ const Sidebar = ({auth, user}) => {
             </div>
             <nav className="sidebar-nav">
                 <ul>
-                    <li><a href="http://127.0.0.1:8000/staff/dashboard">Home</a></li>
-                    <li><a href="http://127.0.0.1:8000/staff/report">Manage Damage Report</a></li>
-                    <li><a href="http://127.0.0.1:8000/staff/appliance">Appliances Registration</a></li>
-                    <li><a href="http://127.0.0.1:8000/staff/hostels">Room Allocation</a></li>
-                    <li><a href="http://127.0.0.1:8000/staff/quotas">View Active Quota</a></li>
+                    <li><a href={route('staff.index')}>Home</a></li>
+                    <li><a href={route('staff.report')}>Manage Damage Report</a></li>
+                    <li><a href={route('staff.appliance')}>Appliances Registration</a></li>
+                    <li><a href={route('staff.hostels.index')}>Room Allocation</a></li>
+                    <li><a href={route('staff.quota')}>View Active Quota</a></li>
                 </ul>
             </nav>
             <div className="sidebar-footer">
