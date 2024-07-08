@@ -60,7 +60,7 @@ const StudentQuota = ({ auth }) => {
                      Third Room Block
                     <input type="text" name="thirdRoomBlock" value={data.thirdRoomBlock} onChange={(e) => setData("thirdRoomBlock", e.target.value)} />
                     Third Room ID
-                    <input type="text" name="thirdRoomID" value={data.secondRoomID} onChange={(e) => setData("thirdRoomID", e.target.value)} />
+                    <input type="text" name="thirdRoomID" value={data.thirdRoomID} onChange={(e) => setData("thirdRoomID", e.target.value)} />
                     </div>
                 </label>
                 <label>
