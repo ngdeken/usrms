@@ -20,7 +20,10 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
         delete queryParams[name];
         }
 
-        router.get(route("student.appliance"), queryParams);
+        //router.get(route("student.appliance"), queryParams);
+        const url = new URL(route("student.appliance"), window.location.origin);
+        url.protocol = 'https:';
+        router.get(url.toString(), queryParams);
     };
 
     const onKeyPress = (name, e) => {
@@ -40,7 +43,10 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
       }
-      router.get(route("student.appliance"), queryParams);
+      //router.get(route("student.appliance"), queryParams);
+      const url = new URL(route("student.appliance"), window.location.origin);
+      url.protocol = 'https:';
+      router.get(url.toString(), queryParams);
     };
 
     return (
