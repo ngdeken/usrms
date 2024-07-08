@@ -49,7 +49,7 @@ const StudentQuotaView = ({ auth, quotas, queryParams = null, success }) => {
             <div className="damage-report-form-container">
                 <header className="form-header">
                     <h1>View Active Quota Application</h1>
-                    <a href="http://127.0.0.1:8000/student/quota/" className="view-report-link">Apply Active Quota</a>
+                    <a href={route("student.quota")} className="view-report-link">Apply Active Quota</a>
                 </header>
                 <table>
                     <thead>

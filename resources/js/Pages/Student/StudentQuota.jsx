@@ -32,7 +32,7 @@ const StudentQuota = ({ auth }) => {
         <div className="damage-report-form-container">
             <header className="form-header">
                 <h1>Apply Active Quota</h1>
-                <a href="http://127.0.0.1:8000/student/quota/view" className="view-report-link">View Active Quota Application</a>
+                <a href={route("student.quota.show")} className="view-report-link">View Active Quota Application</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
                 <label>

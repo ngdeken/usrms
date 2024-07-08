@@ -27,7 +27,7 @@ const ApplianceRegistration = ({auth, order}) => {
             <div className="appliance-form-container">
                 <header className="appliance-form-header">
                     <h1>Update Appliance Registration {order.id}</h1>
-                    <a href="http://127.0.0.1:8000/staff/appliance/" className="view-report-link">View Appliance Registration</a>
+                    <a href={route("staff.appliance")} className="view-report-link">View Appliance Registration</a>
                 </header>
                 <form onSubmit={handleSubmit}>
                 <label>

@@ -32,7 +32,7 @@ const StaffReport = ({ auth, report }) => {
         <div className="damage-report-form-container">
             <header className="form-header">
                 <h1>Update Damage Report {report.id}</h1>
-                <a href="http://127.0.0.1:8000/staff/report/" className="view-report-link">View Damage Report</a>
+                <a href={route("staff.report")} className="view-report-link">View Damage Report</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
                 <label>

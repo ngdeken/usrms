@@ -33,7 +33,7 @@ const FellowQuotaEdit = ({ auth, quota }) => {
             <div className="damage-report-form-container">
                 <header className="form-header">
                     <h1>Update Quota {quota.id}</h1>
-                    <a href="http://127.0.0.1:8000/fellow/quota" className="view-report-link">View Active Quota Application</a>
+                    <a href={route("fellow.quota")} className="view-report-link">View Active Quota Application</a>
                 </header>
                 <form className="damage-report-form" onSubmit={handleSubmit}>
                     <div>

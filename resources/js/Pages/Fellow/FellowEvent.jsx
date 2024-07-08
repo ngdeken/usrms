@@ -56,7 +56,7 @@ const FellowEvent = ({ auth, events, hostels, queryParams = null, success }) => 
             <div className="damage-report-form-container">
                 <header className="form-header">
                     <h1>Event Management</h1>
-                    <a href="http://127.0.0.1:8000/fellow/events/create" className="view-report-link">Add Event</a>
+                    <a href={route("fellow.events.create")}className="view-report-link">Add Event</a>
                 </header>
                 <table>
                     <thead>

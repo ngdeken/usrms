@@ -29,7 +29,7 @@ const AdminUserEdit = ({ auth, user }) => {
         <div className="damage-report-form-container">
             <header className="form-header">
                 <h1>Edit User</h1>
-                <a href="http://127.0.0.1:8000/admin/user/" className="view-report-link">Manage User</a>
+                <a href={route('admin.user')} className="view-report-link">Manage User</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
    

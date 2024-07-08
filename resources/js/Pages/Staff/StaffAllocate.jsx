@@ -25,7 +25,7 @@ const ApplianceRegistration = ({auth, blocks, hostels, room, students}) => {
             <div className="appliance-form-container">
                 <header className="appliance-form-header">
                     <h1>Allocate Block {room.blockID.blockName} Room {room.roomID}</h1>
-                    <a href="http://127.0.0.1:8000/staff/rooms" className="view-report-link">View Rooms</a>
+                    <a href={route("staff.rooms.index")} className="view-report-link">View Rooms</a>
                 </header>
                 <form onSubmit={handleSubmit}>
                     <label>

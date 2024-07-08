@@ -58,7 +58,7 @@ const AdminUser = ({ auth, users, queryParams = null, success }) => {
             <div className="damage-report-form-container">
                 <header className="form-header">
                     <h1>Manage User</h1>
-                    <a href="http://127.0.0.1:8000/admin/create/" className="view-report-link">Create User</a>
+                    <a href={route('admin.create')} className="view-report-link">Create User</a>
                 </header>
                 <table>
                     <thead>

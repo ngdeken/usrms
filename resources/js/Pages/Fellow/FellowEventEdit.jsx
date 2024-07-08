@@ -22,7 +22,7 @@ const FellowEventEdit = ({ auth, event, hostels }) => {
         <div className="damage-report-form-container">
             <header className="form-header">
                 <h1>Edit Event {event.id}</h1>
-                <a href="http://127.0.0.1:8000/fellow/events" className="view-report-link">View Events</a>
+                <a href={route("fellow.events.index")} className="view-report-link">View Events</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
                 <label>

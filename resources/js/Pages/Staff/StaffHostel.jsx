@@ -56,7 +56,7 @@ const StudentReportView = ({ auth, hostels, queryParams = null, success }) => {
             <div className="damage-report-form-container">
                 <header className="form-header">
                     <h1>Hostel Management</h1>
-                    <a href="http://127.0.0.1:8000/staff/hostels/create" className="view-report-link">Add Hostel</a>
+                    <a href={route("staff.hostels.create")} className="view-report-link">Add Hostel</a>
                 </header>
                 <table>
                     <thead>

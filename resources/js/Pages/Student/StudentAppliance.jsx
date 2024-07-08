@@ -49,7 +49,7 @@ const StudentReportView = ({ auth, orders, queryParams = null, success }) => {
             <div className="damage-report-form-container">
                 <header className="form-header">
                     <h1>View Appliances Registration</h1>
-                    <a href="http://127.0.0.1:8000/student/appliance/create" className="view-report-link">Register Appliances</a>
+                    <a href={route("student.appliance.create")} className="view-report-link">Register Appliances</a>
                 </header>
                 <table>
                     <thead>

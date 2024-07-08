@@ -27,7 +27,7 @@ const StudentReport = ({ auth }) => {
         <div className="damage-report-form-container">
             <header className="form-header">
                 <h1>Make Damage Report</h1>
-                <a href="http://127.0.0.1:8000/student/report/view" className="view-report-link">View Damage Report</a>
+                <a href={route("student.report.view")} className="view-report-link">View Damage Report</a>
             </header>
             <form className="damage-report-form" onSubmit={handleSubmit}>
                 <label>

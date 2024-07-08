@@ -50,7 +50,7 @@ const ApplianceRegistration = ({auth}) => {
             <div className="appliance-form-container">
                 <header className="appliance-form-header">
                     <h1>Register Electrical Appliances</h1>
-                    <a href="http://127.0.0.1:8000/student/appliance" className="view-report-link">View Electrical Appliances</a>
+                    <a href={route("student.appliance")} className="view-report-link">View Electrical Appliances</a>
                 </header>
                 <form onSubmit={handleSubmit}>
                 <label>
