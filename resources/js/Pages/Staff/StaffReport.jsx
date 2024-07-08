@@ -179,7 +179,8 @@ const StaffReport = ({ auth, reports, queryParams = null, success }) => {
                                 <td className='px-4 py-4'>{report.reportDescription}</td>
                                 <td className='px-4 py-4'>
                                     {report.reportImage && (
-                                        <img src={report.reportImage} style={{ width: 100 }} />
+                                        //<img src={report.reportImage} style={{ width: 100 }} />
+                                        <img src="{{ asset('storage/' . $report->reportImage) }}" alt="Report Image"/>
                                     )}
                                 </td>
                                 <td className='px-3 py-2'>
