@@ -90,7 +90,8 @@ Route::middleware(['auth', 'staff'])->group(function () {
     Route::delete('staff/report/{report}', [StaffReportController::class, 'destroy'])->name('staff.report.destroy');
     Route::put('staff/appliance/{order}', [StaffApplianceController::class, 'update'])->name('staff.appliance.update');
     Route::delete('staff/appliance/{order}', [StaffApplianceController::class, 'destroy'])->name('staff.appliance.destroy');
-    Route::put('staff/blocks/{block}', [StaffBlockController::class, 'update'])->name('staff.blocks.update');
+    Route::put('staff/hostels/{hostel}', [StaffBlockController::class, 'update'])->name('staff.blocks.update');
+    Route::delete('staff/hostels/{hostel}', [StaffHostelController::class, 'destroy'])->name('staff.hostels.destroy');
     Route::delete('staff/blocks/{block}', [StaffBlockController::class, 'destroy'])->name('staff.blocks.destroy');
     Route::delete('staff/rooms/{room}', [StaffRoomController::class, 'destroy'])->name('staff.rooms.destroy');
     Route::put('staff/rooms/{room}', [StaffRoomController::class, 'update'])->name('staff.rooms.update');

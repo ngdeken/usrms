@@ -83,7 +83,7 @@ class StaffBlockController extends Controller
         $blockID = $block->id;
         $block->delete();
         
-        return to_route('staff.hostels.edit')
+        return to_route('staff.hostels.edit', $blockID)
             ->with('success', "Block \"$blockID\" was deleted");
     }
 }
